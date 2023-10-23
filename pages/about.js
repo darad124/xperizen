@@ -8,7 +8,7 @@ const About = () => {
  
 
   return (
-   <div className="w-full  flex-col justify-start items-start inline-flex ">
+   <div className="inline-flex flex-col items-start justify-start w-full w ">
    
     <CallToAction />
     <Timeline />
