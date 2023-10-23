@@ -113,7 +113,7 @@ const HomePage = () => {
               src="https://via.placeholder.com/616x640" // replace with your image path
               alt="Description of the image" // replace with your image description
               width={500} // replace with your image width
-              height={300} // replace with your image height
+              height={300} // replace wit your image height
             />
           </div>
         </div>
