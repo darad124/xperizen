@@ -8,7 +8,14 @@ const Footer = () => {
       <div className="w-full h-[357px] px-4 md:px-16 py-20 shadow border-t border-white flex-col justify-start items-center gap-20 inline-flex lg:flex md:hidden hidden md:block">
         <div className="inline-flex items-end self-stretch justify-start gap-8">
           <div className="flex-col justify-start items-start gap-2.5 inline-flex">
-            <Image className="w-[177.95px] h-[60px]" src="./logo.svg" alt="Logo" />
+            <Image
+              className="w-[177.95px] h-[60px]"
+              src="/logo.svg" // Adjust the path to your logo image
+              alt="Logo"
+              width={177.95} // Specify the width in pixels
+              height={60} // Specify the height in pixels
+              layout="fixed" // Set the layout to "fixed"
+            />
           </div>
           <div className="text-white text-base font-semibold font-['Poppins'] leading-normal flex items-start justify-start gap-8 lg:flex lg:items-center">
             <div>About</div>
@@ -90,11 +97,31 @@ const Footer = () => {
             </div>
           </div>
           <div className="flex items-center justify-center gap-4 md:justify-end">
-            <Image src="/Facebook.svg" width={24} height={24} alt="Facebook logo" />
-            <Image src="/Instagram.svg" width={24} height={24} alt="Instagram logo" />
+            <Image
+              src="/Facebook.svg"
+              width={24}
+              height={24}
+              alt="Facebook logo"
+            />
+            <Image
+              src="/Instagram.svg"
+              width={24}
+              height={24}
+              alt="Instagram logo"
+            />
             <Image src="/X.svg" width={24} height={24} alt="Twitter logo" />
-            <Image src="/Linkedin.svg" width={24} height={24} alt="LinkedIn logo" />
-            <Image src="/Youtube.svg" width={24} height={24} alt="YouTube logo" />
+            <Image
+              src="/Linkedin.svg"
+              width={24}
+              height={24}
+              alt="LinkedIn logo"
+            />
+            <Image
+              src="/Youtube.svg"
+              width={24}
+              height={24}
+              alt="YouTube logo"
+            />
           </div>
         </div>
         <div className="self-stretch h-[1px] bg-white w-4/5 md:w-full" />

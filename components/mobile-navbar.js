@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 import Button from "Button";
-import Image from 'next/image';
+import Image from "next/image";
 
 function MobileNavbar() {
   const [showMenu, setShowMenu] = useState(false);
@@ -17,7 +17,14 @@ function MobileNavbar() {
         <div className="self-stretch h-[72px] px-16 border-b border-white justify-between items-center inline-flex">
           <div className="flex items-center justify-start gap-6">
             <div className="flex-col justify-start items-center gap-2.5 inline-flex">
-              <Image className="w-[150px] h-[69px]" src="./logo.svg" />
+              <Image
+                className="w-[150px] h-[69px]"
+                src="/logo.svg" // Adjust the path to your logo image
+                alt="Your logo description"
+                width={150} // Specify the width in pixels
+                height={69} // Specify the height in pixels
+                layout="fixed" // Set the layout to "fixed"
+              />
             </div>
           </div>
           <div className="flex items-center justify-center gap-4 md:hidden">
@@ -42,25 +49,46 @@ function MobileNavbar() {
         } transition duration-300 ease-in-out md:hidden`}
       >
         <div className="flex flex-wrap items-center justify-center w-full gap-4 px-8 py-4 bg-gray-900">
-          <a href="#home" className="block p-4 text-lg font-bold text-white active">
+          <a
+            href="#home"
+            className="block p-4 text-lg font-bold text-white active"
+          >
             Logo
           </a>
-          <a href="#about" className="block p-4 text-lg text-white hover:bg-gray-700">
+          <a
+            href="#about"
+            className="block p-4 text-lg text-white hover:bg-gray-700"
+          >
             About
           </a>
-          <a href="#blog" className="block p-4 text-lg text-white hover:bg-gray-700">
+          <a
+            href="#blog"
+            className="block p-4 text-lg text-white hover:bg-gray-700"
+          >
             Blog
           </a>
-          <a href="#events" className="block p-4 text-lg text-white hover:bg-gray-700">
+          <a
+            href="#events"
+            className="block p-4 text-lg text-white hover:bg-gray-700"
+          >
             Events
           </a>
-          <a href="#contact" className="block p-4 text-lg text-white hover:bg-gray-700">
+          <a
+            href="#contact"
+            className="block p-4 text-lg text-white hover:bg-gray-700"
+          >
             Contact
           </a>
-          <a href="#signup" className="block p-4 text-lg text-orange hover:bg-gray-700">
+          <a
+            href="#signup"
+            className="block p-4 text-lg text-orange hover:bg-gray-700"
+          >
             Sign Up
           </a>
-          <a href="#login" className="block p-4 text-lg text-white hover:bg-gray-700">
+          <a
+            href="#login"
+            className="block p-4 text-lg text-white hover:bg-gray-700"
+          >
             Login
           </a>
         </div>
