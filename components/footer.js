@@ -80,7 +80,13 @@ const Footer = () => {
       <div className="inline-flex flex-col items-center justify-start w-full gap-4 px-4 py-8 border border-black shadow md:px-16 lg:hidden">
         <div className="inline-flex flex-col items-center justify-start gap-4">
           <div className="flex items-start justify-center gap-4">
-            <Image className="h-10 w-28" src="/logo.svg" alt="Logo" />
+            <Image
+              className="h-10 w-28"
+              src="/logo.svg" // Adjust the path to your logo image
+              alt="Logo"
+              width={112} // Specify the width in pixels
+              height={40} // Specify the height in pixels
+            />
           </div>
           <div className="flex items-start justify-center gap-4 md:justify-start">
             <div className="text-white text-base font-semibold font-[Poppins] leading-normal">

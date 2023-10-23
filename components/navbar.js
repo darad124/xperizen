@@ -27,11 +27,11 @@ export default function Navbar() {
             <div className="flex-col justify-start items-center gap-2.5 inline-flex">
               <Image
                 className="w-[150px] h-[69px]"
-                src="./logo.png" // Adjust the path to your logo image
+                src="/logo.png" // Adjust the path to your logo image
                 alt="Logo"
                 width={150} // Specify the width in pixels
                 height={69} // Specify the height in pixels
-                layout="fixed" // Set the layout to "fixed"
+                
               />
             </div>
             {/* Navigation links for desktop */}

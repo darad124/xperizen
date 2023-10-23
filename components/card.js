@@ -6,6 +6,8 @@ const Card = () => {
         className="self-stretch"
         src="https://via.placeholder.com/416x300"
         alt="A description for your image"
+        width={416}
+        height={300}
       />
       <div className="flex flex-col items-start self-stretch justify-start gap-4">
         <div className="inline-flex items-center justify-start gap-4">
