@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image';
 
 
 const CallToAction = () => {
@@ -11,7 +12,13 @@ const CallToAction = () => {
 </div>
 
     </div>
-    <img src="https://via.placeholder.com/1312x700" width={1312} height={700} layout="responsive" />
+    <Image
+  src="https://via.placeholder.com/1312x700"
+  width={1312}
+  height={700}
+  layout="responsive"
+  alt="A description for your image"
+/>
   </div>
   
   );

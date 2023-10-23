@@ -1,7 +1,8 @@
 import { useState } from 'react';
-import Button from './Button';
+import Button from 'Button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars,faTimes  } from '@fortawesome/free-solid-svg-icons';
+import Image from 'next/image';
 
 const navLinks = [
   { text: 'About', link: '/about' },
@@ -24,7 +25,7 @@ export default function Navbar() {
         <div className="inline-flex items-center self-stretch justify-between px-2 border-b md:px-16">
           <div className="flex items-center justify-between gap-6">
             <div className="flex-col justify-start items-center gap-2.5 inline-flex">
-              <img className="w-[150px] h-[69px]" src="./logo.png" alt="Logo" />
+              <Image className="w-[150px] h-[69px]" src="./logo.png" alt="Logo" />
             </div>
             {/* Navigation links for desktop */}
             <div className="items-start justify-start hidden gap-8 md:flex">
