@@ -19,7 +19,7 @@ function MobileNavbar() {
             <div className="flex-col justify-start items-center gap-2.5 inline-flex">
               <Image
                 className="w-[150px] h-[69px]"
-                src="/logo.svg" // Adjust the path to your logo image
+                src="./logo.svg" // Adjust the path to your logo image
                 alt="Your logo description"
                 width={150} // Specify the width in pixels
                 height={69} // Specify the height in pixels

@@ -10,7 +10,7 @@ const Footer = () => {
           <div className="flex-col justify-start items-start gap-2.5 inline-flex">
             <Image
               className="w-[177.95px] h-[60px]"
-              src="/logo.svg" // Adjust the path to your logo image
+              src="./logo.svg" // Adjust the path to your logo image
               alt="Logo"
               width={177.95} // Specify the width in pixels
               height={60} // Specify the height in pixels
