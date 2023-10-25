@@ -52,7 +52,7 @@ class ContactUs extends React.Component {
             <textarea ref={this.queryRef} name="message" onChange={this.handleInputChange} className="self-stretch h-[180px] p-3 bg-white border border-white justify-start items-start inline-flex"></textarea>
           </label>
          
-          <button type="submit" className="px-6 py-3 bg-orange-600 rounded-[13px] border border-white justify-center items-center gap-2 inline-flex hover:bg-orange-500 transform transition duration-500 ease-in-out hover:scale-105 focus:outline-none focus:ring-2 focus:ring-orange-400 mt-8 lg:mt-0 focus:ring-opacity-50 text-white ggg">
+          <button type="submit" className="px-6 py-3 bg-orange-600 rounded-[13px] border border-white justify-center items-center gap-2 inline-flex hover:bg-orange-500 transform transition duration-500 ease-in-out hover:scale-105 focus:outline-none focus:ring-2 focus:ring-orange-400 mt-8 lg:mt-0 focus:ring-opacity-50 text-white ">
   Submit
 </button>
 
