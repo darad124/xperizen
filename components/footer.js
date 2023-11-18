@@ -5,7 +5,7 @@ const Footer = () => {
   return (
     <div>
       {/* Desktop Footer Content (hidden on small and medium screens) */}
-      <div className="w-full h-[357px] px-4 md:px-16 py-20 shadow border-t border-white flex-col justify-start items-center gap-20 inline-flex lg:flex md:hidden hidden md:block">
+      <div className="w-full h-[357px] px-4 md:px-16 py-20 shadow border-t border-white flex-col justify-start items-center gap-20 inline-flex lg:flex hidden md:block">
         <div className="inline-flex items-end self-stretch justify-start gap-8">
           <div className="flex-col justify-start items-start gap-2.5 inline-flex">
             <Image
@@ -37,6 +37,7 @@ const Footer = () => {
               alt="Instagram logo"
             />
             <Image src="./X.svg" width={24} height={24} alt="Twitter logo" />
+
             <Image
               src="./Linkedin.svg"
               width={24}
@@ -77,7 +78,7 @@ const Footer = () => {
       </div>
 
       {/* Mobile Footer Content (hidden on large screens) */}
-      <div className="inline-flex flex-col items-center justify-start w-full gap-4 px-4 py-8 border border-black shadow md:px-16 lg:hidden">
+      <div className="inline-flex flex-col items-center justify-start w-full gap-4 px-4 py-8 border border-black shadow md:px-16 lg:hidden md:hidden">
         <div className="inline-flex flex-col items-center justify-start gap-4">
           <div className="flex items-start justify-center gap-4">
             <Image

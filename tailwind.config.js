@@ -14,6 +14,15 @@ module.exports = {
       backgroundSize: {
         'size': '20%',  // adjust this value to make your pattern smaller or larger
       },
+      animation: {  // Add this block
+        'underline': 'underline 0.5s forwards'
+      },
+      keyframes: {  // Add this block
+        underline: {
+          '0%': { 'width': '0%' },
+          '100%': { 'width': '100%' }
+        }
+      }
     },
   },
   variants: {
@@ -24,4 +33,8 @@ module.exports = {
     },
   },
   plugins: [],
+  corePlugins: {
+    // ... other core plugins
+    position: true,
+  }
 }

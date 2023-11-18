@@ -66,7 +66,7 @@ const HomePage = () => {
         </div>
       </div>
       <div className="items-center justify-center w-full h-full ">
-        <div className="lg:px-16 px-4 py-[112px] lg:flex-row flex flex-col ">
+        <div className="lg:px-16 px-4 lg:py-28 sm:py-12 lg:flex-row flex flex-col ">
           <div className="flex  w-full h-full lg:h-[640px]">
             <div className="justify-between w-full">
               <div className="text-center lg:text-left text-white text-base font-semibold font-['Poppins'] leading-normal">
@@ -93,7 +93,7 @@ const HomePage = () => {
                       Learn More
                     </div>
                   </button>
-                  <button className="flex items-center justify-center gap-1 sm:gap-2 px-3 py-1.5 sm:px-6 sm:py-3 bg-black  hover:scale-105 transition-transform animate-pulse">
+                  <button className="flex items-center justify-center gap-1 sm:gap-2 px-3 py-1.5   bg-black  hover:scale-105 transition-transform animate-pulse">
                     <div className="text-white whitespace-nowrap text-xs sm:text-base font-normal font-['Poppins'] leading-normal">
                       Book Now
                     </div>

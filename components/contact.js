@@ -31,7 +31,7 @@ class ContactUs extends React.Component {
 
   render() {
     return (
-      <div className="w-full lg:h-[1006px] px-16 lg:py-28 py-0 flex-col justify-center items-center lg:gap-20 inline-flex">
+      <div className="w-full lg:h-[1006px] lg:px-16 px-8 lg:py-28 py-0 flex-col justify-center items-center lg:gap-20 inline-flex">
         <div className="lg:h-[149px] flex-col py-0 justify-start items-center lg:gap-4 flex">
           <div className="self-stretch lg:h-[109px] flex-col justify-start items-center lg:gap-6 flex">
             <div className="self-stretch text-center text-white lg:text-5xl text-2xl font-bold font-['Poppins'] lg:leading-[57.60px]">Contact us</div>
