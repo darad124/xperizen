@@ -114,7 +114,7 @@ const About = () => {
                   With Xperizen, the world is your playground. Whether
                   you&apos;re embarking on a solo journey, travelling with
                   friends, or seeking corporate adventures, we have a tailored
-                  experience waiting for you.
+                  experience waiting for you .
                 </div>
               </div>
             </div>
