@@ -5,7 +5,7 @@ const Footer = () => {
   return (
     <div>
       {/* Desktop Footer Content (hidden on small and medium screens) */}
-      <div className="w-full h-[357px] px-4 md:px-16 py-20 shadow border-t border-white flex-col justify-start items-center gap-20 inline-flex lg:flex hidden md:block">
+      <div className="w-full h-[357px] px-4 md:px-16 py-20 shadow border-t border-white flex-col justify-start items-center gap-20  lg:flex hidden md:block">
         <div className="inline-flex items-end self-stretch justify-start gap-8">
           <div className="flex-col justify-start items-start gap-2.5 inline-flex">
             <Image

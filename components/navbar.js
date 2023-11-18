@@ -86,7 +86,7 @@ export default function Navbar() {
             </div>
             {/* Buttons for desktop */}
           </div>
-          <div className="flex items-center justify-end hidden gap-4 md:flex">
+          <div className=" items-center justify-end hidden gap-4 md:flex">
             {user !== null ? (
               <div className="relative text-3xl text-orange-600">
                 <FontAwesomeIcon icon={faUser} onClick={toggleDropdown} />
