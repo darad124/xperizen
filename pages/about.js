@@ -1,6 +1,6 @@
 import CallToAction from "@/components/call_to_action";
 import Team from "@/components/team";
-import Image from 'next/image'
+import Image from "next/image";
 
 import Timeline from "@/components/timeline";
 const teamMembers = [
@@ -61,11 +61,11 @@ const About = () => {
         <div className="self-stretch   justify-start items-start gap-12  flex">
           <div className="self-stretch justify-start items-start gap-12 lg:flex-row flex-col flex">
             <div className="grow shrink basis-0 flex-col justify-start items-start gap-8 inline-flex">
-              <Image
+            <Image
                 src="https://via.placeholder.com/405x240"
                 alt="Placeholder Image"
-                layout="fill"
-                objectFit="cover"
+                width={405}
+                height={240}
               />
 
               <div className="self-stretch  flex-col justify-start items-start gap-6 flex">
@@ -81,12 +81,13 @@ const About = () => {
               </div>
             </div>
             <div className="grow shrink basis-0 flex-col justify-start items-start gap-8 inline-flex">
-            <Image
+              <Image
                 src="https://via.placeholder.com/405x240"
                 alt="Placeholder Image"
-                layout="fill"
-                objectFit="cover"
+                width={405}
+                height={240}
               />
+
               <div className="self-stretch h-[186px] flex-col justify-start items-start gap-6 flex">
                 <div className="self-stretch text-white lg:text-4xl text-2xl font-bold font-['Poppins'] lg:leading-[41.60px]">
                   Creativity Unleashed
@@ -103,8 +104,8 @@ const About = () => {
             <Image
                 src="https://via.placeholder.com/405x240"
                 alt="Placeholder Image"
-                layout="fill"
-                objectFit="cover"
+                width={405}
+                height={240}
               />
               <div className="self-stretch h-[186px] flex-col justify-start items-start gap-6 flex">
                 <div className="self-stretch text-white lg:text-4xl text-2xl font-bold font-['Poppins'] lg:leading-[41.60px]">
@@ -114,7 +115,7 @@ const About = () => {
                   With Xperizen, the world is your playground. Whether
                   you&apos;re embarking on a solo journey, travelling with
                   friends, or seeking corporate adventures, we have a tailored
-                  experience waiting for you .
+                  experience waiting for you.
                 </div>
               </div>
             </div>

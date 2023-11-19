@@ -4,17 +4,17 @@ import Image from "next/image";
 const Timeline = () => {
   const data = Array(5).fill(0);
   return (
-    <div class="w-full h- lg:px-16 px-4 lg:py-28 py-6  justify-start items-start lg:gap-20 flex flex-col lg:flex-row">
-      <div class="grow shrink basis-0 flex-col justify-start items-start gap-4 inline-flex">
-        <div class="text-white text-base font-semibold font-['Poppins'] leading-normal">
+    <div className="w-full h- lg:px-16 px-4 lg:py-28 py-6  justify-start items-start lg:gap-20 flex flex-col lg:flex-row">
+      <div className="grow shrink basis-0 flex-col justify-start items-start gap-4 inline-flex">
+        <div className="text-white text-base font-semibold font-['Poppins'] leading-normal">
           Our story
         </div>
-        <div class="self-stretch text-white lg:text-5xl text-2xl justify-center font-bold font-['Poppins'] lg:leading-[57.60px]">
+        <div className="self-stretch text-white lg:text-5xl text-2xl justify-center font-bold font-['Poppins'] lg:leading-[57.60px]">
           Share your journey from
           the beginning to now
         </div>
       </div>
-      <div class="grow shrink basis-0 flex-col justify-start items-start gap-4 inline-flex">
+      <div className="grow shrink basis-0 flex-col justify-start items-start gap-4 inline-flex">
       const data = Array(5).fill(0); // Create an array of 5 elements
 
 
