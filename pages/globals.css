@@ -11,3 +11,30 @@ body {
 ::after {
   border-width: 0;
 }
+.overlay {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.75);
+}
+
+.modal {
+  color: lightsteelblue;
+  width: 95%;
+  height: 100%;
+  max-width: 700px;
+  position: fixed;
+  padding: 0px;
+  margin: 20px 0;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@media (max-width: 600px) {
+  .modal {
+    width: 100%; /* Full width on small screens */
+    height: auto; /* Full height on small screens */
+    
+  }
+}

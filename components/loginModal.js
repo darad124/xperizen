@@ -31,43 +31,17 @@ const LoginModal = ({ onSignUpClick, isOpen, onRequestClose }) => {
 
   return (
     <Modal
-      isOpen={isOpen}
-      onRequestClose={onRequestClose}
-      contentLabel="Login Modal"
-      style={{
-        overlay: {
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          backgroundColor: "rgba(0, 0, 0, 0.75)",
-        },
-        content: {
-          color: "lightsteelblue",
-          width: "95%",
-          maxWidth: "700px",
-          height: "95%",
-          position: "fixed",
-          padding: "0px",
-          marginBottom: "50px",
-          top: "50%",
-          left: "50%",
-          transform: "translate(-50%, -50%)",
-          "@media (max-width: 600px)": {
-            width: "75%",
-            height: "100vh",
-            maxWidth: "none",
-            maxHeight: "none",
-            overflow: "auto",
-            left: 0,
-            "overflow-x": "hidden",
-          },
-        },
-      }}
-    >
-      <div className="flex flex-col items-center justify-center h-auto px-8 bg-transparent lg:mt-4 md:px-8 lg:px-12">
-        <div className="flex flex-col items-center w-full px-2 bg-white md:px-12 lg:px-14 gap-6">
+  isOpen={isOpen}
+  onRequestClose={onRequestClose}
+  contentLabel="login Modal"
+  className="modal"
+  overlayClassName="overlay"
+>
+
+      <div className="flex flex-col items-center justify-center h-auto px-1 bg-transparent lg:mt-4 md:px-8 lg:px-12">
+        <div className="relative flex flex-col items-center w-full gap-6 px-2 bg-white md:px-12 lg:px-14">
           <div
-            className="absolute lg:text-3xl text-5xl text-black transition-transform transform cursor-pointer top-2 right-2 hover:scale-110"
+            className="absolute text-5xl text-black transition-transform transform cursor-pointer lg:text-3xl top-2 right-2 hover:scale-110"
             onClick={onRequestClose}
           >
             <FontAwesomeIcon icon={faTimes} />
@@ -81,14 +55,14 @@ const LoginModal = ({ onSignUpClick, isOpen, onRequestClose }) => {
 
           <form
             onSubmit={onSubmit}
-            className="flex flex-col items-center justify-center w-full lg:gap-4 gap-6 py-2"
+            className="flex flex-col items-center justify-center w-full gap-6 py-2 lg:gap-4"
           >
             <div className="flex flex-col items-start justify-start w-full lg:h-20 lg:gap-2">
               <label className="w-full text-black lg:text-base text-3xl font-normal font-['Poppins'] leading-normal">
                 Email<span className="text-orange-600">*</span>
               </label>
               <input
-                className="w-full  bg-white border border-black lg:p-3 py-6"
+                className="w-full py-6 bg-white border border-black lg:p-3"
                 type="email"
                 value={email}
                 onChange={(event) => setEmail(event.target.value)}
@@ -99,13 +73,13 @@ const LoginModal = ({ onSignUpClick, isOpen, onRequestClose }) => {
                 Password<span className="text-orange-600">*</span>
               </label>
               <input
-                className="w-full p-2 bg-white border border-black lg:p-3 py-6"
+                className="w-full p-2 py-6 bg-white border border-black lg:p-3"
                 type="password"
                 value={password}
                 onChange={(event) => setPassword(event.target.value)}
               />
             </div>
-            <div className="flex flex-col items-center mt-8 justify-center w-full gap-8 h-28">
+            <div className="flex flex-col items-center justify-center w-full gap-8 mt-8 h-28">
               <button
                 type="submit"
                 className="w-full px-6 lg:py-3  lg:mt-6  bg-orange-600 hover:bg-orange-700 rounded-[13px] justify-center items-center gap-2 flex"
@@ -125,7 +99,7 @@ const LoginModal = ({ onSignUpClick, isOpen, onRequestClose }) => {
               <p className="text-center text-black lg:text-base text-2xl whitespace-nowrap  font-normal font-['Poppins'] lg:leading-normal">
                 Already have an account?
               </p>
-              <div className="group block relative">
+              <div className="relative block group">
                 <button
                   onClick={onSignUpClick}
                   className="text-center text-black lg:text-base text-2xl lg:font-normal font-['Poppins'] leading-normal"

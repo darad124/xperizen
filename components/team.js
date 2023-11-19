@@ -86,7 +86,7 @@ const Team = () => {
           ))}
         </div>
       </div>
-      <div className="w-[768px] h-[157px] flex-col justify-start items-start gap-6 inline-flex">
+      <div className="lg:w-[768px]  flex-col justify-start items-start gap-6 inline-flex">
         <div className="h-[85px] flex-col justify-start items-center gap-4 flex">
           <div className="self-stretch text-white text-[32px] font-bold font-['Poppins'] leading-[41.60px]">
             We’re hiring!

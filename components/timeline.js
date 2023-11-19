@@ -15,7 +15,7 @@ const Timeline = () => {
         </div>
       </div>
       <div className="grow shrink basis-0 flex-col justify-start items-start gap-4 inline-flex">
-      const data = Array(5).fill(0); // Create an array of 5 elements
+      const data = Array(5).fill(0); 
 
 
     {data.map((_, index) => (

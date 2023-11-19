@@ -88,7 +88,7 @@ const About = () => {
                 height={240}
               />
 
-              <div className="self-stretch h-[186px] flex-col justify-start items-start gap-6 flex">
+              <div className="self-stretch  flex-col justify-start items-start gap-6 flex">
                 <div className="self-stretch text-white lg:text-4xl text-2xl font-bold font-['Poppins'] lg:leading-[41.60px]">
                   Creativity Unleashed
                 </div>

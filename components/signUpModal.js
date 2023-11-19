@@ -35,49 +35,23 @@ const SignUpModal = ({ isOpen, onRequestClose,onLoginClick }) => {
 
   return (
     <Modal
-      isOpen={isOpen}
-      onRequestClose={onRequestClose}
-      contentLabel="Sign Up Modal"
-      style={{
-        overlay: {
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          backgroundColor: "rgba(0, 0, 0, 0.75)",
-        },
-        content: {
-          color: "lightsteelblue",
-          width: "95%",
-          height: "95%",
-          maxWidth: "700px",
-          position: "fixed",
-          padding: "0px",
-          marginBottom: "50px",
-          top: "50%",
-          left: "50%",
-          transform: "translate(-50%, -50%)",
-          "@media (max-width: 600px)": {
-            width: "75%", // Full width on small screens
-            height: "100vh", // Full height on small screens
-            maxWidth: "none", // No maximum width on small screens
-            maxHeight: "none", // No maximum height on small screens
-            overflow: "auto", // Enable scrolling on small screens
-            left: 0,
-            // No margin on small screens
-            "overflow-x": "hidden",
-          },
-        },
-      }}
-    >
-      <div className="flex flex-col items-center justify-center h-auto px-8 bg-transparent lg:mt-4 md:px-8 lg:px-12">
-        <div className="flex flex-col items-center w-full px-2 bg-white md:px-12 lg:px-14">
+  isOpen={isOpen}
+  onRequestClose={onRequestClose}
+  contentLabel="Sign Up Modal"
+  className="modal"
+  overlayClassName="overlay"
+>
+
+  
+      <div className="flex flex-col items-center justify-center h-full px-8 bg-transparent  lg:mt-4 md:px-8 lg:px-12">
+        <div className="flex relative flex-col items-center w-full px-2 bg-white md:px-12 lg:px-14">
           <div
             className="absolute text-3xl text-black transition-transform transform cursor-pointer top-2 right-2 hover:scale-110"
             onClick={onRequestClose}
           >
             <FontAwesomeIcon icon={faTimes} />
           </div>
-          <div className="w-full text-center text-black  py-2 lg:py-0 lg:text-5xl  lg:mt-0 mt-8 text-4xl font-bold font-['Poppins'] ">
+          <div className="w-full text-center text-black   py-2 lg:pt-4 lg:text-5xl  lg:mt-0 mt-8 text-4xl font-bold font-['Poppins'] ">
             Sign Up
           </div>
           <div className="w-full text-center text-black py-2  lg:text-lg font-normal font-['Poppins'] ">
