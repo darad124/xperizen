@@ -47,9 +47,9 @@ const SignUpModal = ({ isOpen, onRequestClose,onLoginClick }) => {
         },
         content: {
           color: "lightsteelblue",
-          width: "100%",
-          maxWidth: "600px",
-          height: "90vh",
+          width: "95%",
+          height: "95%",
+          maxWidth: "700px",
           position: "fixed",
           padding: "0px",
           marginBottom: "50px",

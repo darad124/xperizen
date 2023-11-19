@@ -43,7 +43,9 @@ const LoginModal = ({ onSignUpClick, isOpen, onRequestClose }) => {
         },
         content: {
           color: "lightsteelblue",
-          width: "100%",
+          width: "95%",
+          maxWidth: "700px",
+          height: "100%",
           position: "fixed",
           padding: "0px",
           marginBottom: "50px",
