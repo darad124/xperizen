@@ -10,7 +10,7 @@ const HomePage = () => {
       <div
         className="w-full bg-center max-w-full bg-cover h-[400px] md:h-[800px] bg-black bg-opacity-30"
         style={{
-          backgroundImage: "url(./home1img.jpg)",
+          backgroundImage: "url(./home1img.svg)",
           filter: "blur(0.5px)",
         }}
       >
@@ -38,7 +38,7 @@ const HomePage = () => {
         <div className="lg:w-[616px] lg:h-[134px] m-4 text-white text-[30px] lg:text-[56px] font-bold font-['Poppins'] lg:leading-[67.20px] text-center lg:text-left">
           Step into the past with Experizen
         </div>
-        <div className="lg:w-[616px] w-full h-[134px] flex flex-col space-y-6">
+        <div className="lg:w-[616px] w-full  flex flex-col space-y-6">
           <div className="w-full lg:w-[616px] text-white px-4 lg:px-0 text-lg font-normal font-['Poppins'] lg:leading-[27px] text-center lg:text-left">
             Experience history like never before and immerse yourself in the
             sights, sounds, and stories of century past.
@@ -66,7 +66,7 @@ const HomePage = () => {
         </div>
       </div>
       <div className="items-center justify-center w-full h-full ">
-        <div className="lg:px-16 px-4 lg:py-28 sm:py-12 lg:flex-row flex flex-col ">
+        <div className="flex flex-col px-4 lg:px-16 lg:py-28 sm:py-12 lg:flex-row ">
           <div className="flex  w-full h-full lg:h-[640px]">
             <div className="justify-between w-full">
               <div className="text-center lg:text-left text-white text-base font-semibold font-['Poppins'] leading-normal">

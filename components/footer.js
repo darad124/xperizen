@@ -3,9 +3,9 @@ import Image from "next/image";
 
 const Footer = () => {
   return (
-    <div>
+    <div className="w-full" >
       {/* Desktop Footer Content (hidden on small and medium screens) */}
-      <div className="w-full h-[357px] px-4 md:px-16 py-20 shadow border-t border-white flex-col justify-start items-center gap-20  lg:flex hidden md:block">
+      <div className="w-full h-[357px] px-4 md:px-16 py-20 shadow border-t border-white flex-col justify-start items-center gap-20  lg:flex hidden md:flex">
         <div className="inline-flex items-end self-stretch justify-start gap-8">
           <div className="flex-col justify-start items-start gap-2.5 inline-flex">
             <Image
@@ -78,80 +78,65 @@ const Footer = () => {
       </div>
 
       {/* Mobile Footer Content (hidden on large screens) */}
-      <div className="inline-flex flex-col items-center justify-start w-full gap-4 px-4 py-8 border border-black shadow md:px-16 lg:hidden md:hidden">
-        <div className="inline-flex flex-col items-center justify-start gap-4">
-          <div className="flex items-start justify-center gap-4">
-            <Image
-              className="h-10 w-28"
-              src="/logo.svg" // Adjust the path to your logo image
+      <div className="inline-flex flex-col items-center justify-start w-full gap-4 py-8 border border-black shadow md:px-16 lg:hidden md:hidden">
+      <div className="w-full h-[191px] px-16 py-4 border-t border-slate-500 flex-col justify-center items-center gap-6 inline-flex">
+    <div className="w-[357px] justify-between items-end inline-flex">
+        <div className="flex-col justify-start items-start gap-2.5 inline-flex">
+        <Image
+              className="w-[120px] h-[34px]"
+              src="./logo.svg" // Adjust the path to your logo image
               alt="Logo"
-              width={112} // Specify the width in pixels
-              height={40} // Specify the height in pixels
+              width={120} // Specify the width in pixels
+              height={34} // Specify the height in pixels
+              layout="fixed" // Set the layout to "fixed"
             />
-          </div>
-          <div className="flex items-start justify-center gap-4 md:justify-start">
-            <div className="text-white text-base font-semibold font-[Poppins] leading-normal">
-              About
-            </div>
-            <div className="text-white text-base font-semibold font-[Poppins] leading-normal">
-              Blog
-            </div>
-            <div className="text-white text-base font-semibold font-[Poppins] leading-normal">
-              Tours and Events
-            </div>
-            <div className="text-white text-base font-semibold font-[Poppins] leading-normal">
-              Contact Us
-            </div>
-          </div>
-          <div className="flex items-center justify-center gap-4 md:justify-end">
-            <Image
-              src="/Facebook.svg"
+        </div>
+        <div className="flex items-center justify-center gap-3">
+        <Image
+              src="./Facebook.svg"
               width={24}
               height={24}
               alt="Facebook logo"
             />
             <Image
-              src="/Instagram.svg"
+              src="./Instagram.svg"
               width={24}
               height={24}
               alt="Instagram logo"
             />
-            <Image src="/X.svg" width={24} height={24} alt="Twitter logo" />
+            <Image src="./X.svg" width={24} height={24} alt="Twitter logo" />
+
             <Image
-              src="/Linkedin.svg"
+              src="./Linkedin.svg"
               width={24}
               height={24}
               alt="LinkedIn logo"
             />
             <Image
-              src="/Youtube.svg"
+              src="./Youtube.svg"
               width={24}
               height={24}
               alt="YouTube logo"
             />
-          </div>
         </div>
-        <div className="self-stretch h-[1px] bg-white w-4/5 md:w-full" />
-        <div className="inline-flex flex-col items-center justify-start gap-4 md:items-start md:flex-row">
-          <div className="text-white text-sm font-normal font-[Poppins] leading-[21px] md:mr-4">
-            2023 Experizen. All right reserved.
-          </div>
-          <div className="flex items-start justify-center gap-4 md:justify-start">
-            <div className="text-white text-sm font-normal font-[Poppins] underline leading-[21px]">
-              Privacy Policy
+    </div>
+    <div className="h-[101px] flex-col justify-start items-center gap-4 flex">
+        <div className="self-stretch h-px bg-white" />
+        <div className="flex flex-col items-center justify-center gap-3">
+            <div className="text-white text-xs font-normal font-['Poppins'] leading-[18px]">2023 Experizen. All right reserved.</div>
+            <div className="flex flex-row gap-2 text-white text-xs font-normal font-['Poppins'] underline leading-[18px]">
+  <a href="#" className="whitespace-nowrap">Privacy Policy</a>
+  <a href="#" className="whitespace-nowrap">Terms of Service</a>
+  <a href="#" className="whitespace-nowrap">Cookies Settings</a>
+</div>
+
+            <div className="inline-flex items-center justify-center gap-2">
+                <div className="text-orange-600 text-xs font-normal font-['Poppins'] underline leading-[18px]">Designed by Kingpin Design</div>
+                <div className="relative w-6 h-6 bg-orange-600 rounded" />
             </div>
-            <div className="text-white text-sm font-normal font-[Poppins] underline leading-[21px]">
-              Terms of Service
-            </div>
-            <div className="text-white text-sm font-normal font-[Poppins] underline leading-[21px]">
-              Cookies Settings
-            </div>
-          </div>
-          <div className="text-orange-600 text-sm font-normal font-[Poppins] leading-[21px]">
-            Designed by Kingpin Design
-          </div>
-          <div className="relative w-6 h-6 bg-orange-600 rounded" />
         </div>
+    </div>
+</div>
       </div>
     </div>
   );

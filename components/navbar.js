@@ -3,6 +3,7 @@ import Button from "./button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faTimes, faUser } from "@fortawesome/free-solid-svg-icons";
 import Image from "next/image";
+import Link from 'next/link';
 import SignUpModal from "./signUpModal";
 import LoginModal from "./loginModal";
 import {
@@ -11,7 +12,6 @@ import {
   signOutUser,
   useAuthState,
 } from "../src/firebase"; // Update this path to point to your firebase.js file
-import ReactDOM from "react-dom";
 
 const navLinks = [
   { text: "About", link: "/about" },
@@ -29,10 +29,18 @@ export default function Navbar() {
   const user = useAuthState();
   const handleLoginClick = () => {
     setModal("login");
+
+    // Prevent background scrolling when modal is open
+    document.body.style.overflow = "hidden";
   };
+
   const handleSignUpClick = () => {
     setModal("signup");
+
+    // Prevent background scrolling when modal is open
+    document.body.style.overflow = "hidden";
   };
+
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       console.log("User:", user);
@@ -58,20 +66,26 @@ export default function Navbar() {
   };
 
   return (
-    <div className={`top-0 flex flex-wrap w-full bg-black bg-opacity-75 z-10 sticky md:flex-nowrap ${modal ? 'hidden' : ''}`}>
-
-
-      <div className="inline-flex flex-col items-center justify-start w-full">
+    <div
+      className={`top-0 flex flex-wrap w-full bg-black bg-opacity-75 z-10 sticky  md:flex-nowrap ${
+        modal ? "hidden" : ""
+      }`}
+    >
+      <div className="relative inline-flex flex-col items-center justify-start w-full h-auto ">
         <div className="inline-flex items-center self-stretch justify-between px-2 border-b md:px-16">
           <div className="flex items-center justify-between gap-6">
             <div className="flex-col justify-start items-center gap-2.5 inline-flex">
-              <Image
-                className="w-[150px] h-[69px]"
-                src="/logo.png" // Adjust the path to your logo image
-                alt="Logo"
-                width={150} // Specify the width in pixels
-                height={69} // Specify the height in pixels
-              />
+              <Link href="/">
+                
+                  <Image
+                    className="w-[150px] h-[69px]"
+                    src="/logo.png" // Adjust the path to your logo image
+                    alt="Logo"
+                    width={150} // Specify the width in pixels
+                    height={69} // Specify the height in pixels
+                  />
+              
+              </Link>
             </div>
             {/* Navigation links for desktop */}
             <div className="items-start justify-start hidden gap-8 md:flex">
@@ -86,7 +100,7 @@ export default function Navbar() {
             </div>
             {/* Buttons for desktop */}
           </div>
-          <div className=" items-center justify-end hidden gap-4 md:flex">
+          <div className="items-center justify-end hidden gap-4 md:flex">
             {user !== null ? (
               <div className="relative text-3xl text-orange-600">
                 <FontAwesomeIcon icon={faUser} onClick={toggleDropdown} />
@@ -131,13 +145,25 @@ export default function Navbar() {
                 </Button>
                 <SignUpModal
                   isOpen={modal === "signup"}
-                  onRequestClose={() => setModal("")}
-                  onLoginClick={() => setModal("login")}
+                  onRequestClose={() => {
+                    setModal("");
+                    document.body.style.overflow = "auto"; // Allow background scrolling
+                  }}
+                  onLoginClick={() => {
+                    setModal("login");
+                    document.body.style.overflow = "hidden"; // Prevent background scrolling
+                  }}
                 />
                 <LoginModal
                   isOpen={modal === "login"}
-                  onRequestClose={() => setModal("")}
-                  onSignUpClick={() => setModal("signup")}
+                  onRequestClose={() => {
+                    setModal("");
+                    document.body.style.overflow = "auto"; // Allow background scrolling
+                  }}
+                  onSignUpClick={() => {
+                    setModal("signup");
+                    document.body.style.overflow = "hidden"; // Prevent background scrolling
+                  }}
                 />
               </>
             )}
@@ -157,11 +183,11 @@ export default function Navbar() {
         </div>
         {/* Navigation links for mobile */}
         {menuOpen && (
-          <div className="flex flex-col items-center gap-2 pb-2 md:hidden">
+          <div className="absolute flex flex-col items-center gap-2 p-2 bg-black bg-opacity-95 top-[70px] w-full md:hidden">
             {navLinks.map((link, index) => (
               <div
                 key={index}
-                className="text-white text-base font-semibold font-['Poppins'] leading-normal"
+                className="text-white text-base font-semibold font-['Poppins'] z-10 leading-normal w-full border-b border-gray-600 px-4 text-center"
               >
                 {link.modal ? (
                   <button onClick={() => handleModalClick(link.modal, true)}>

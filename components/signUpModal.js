@@ -4,16 +4,25 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { signUp } from "../src/firebase"; // Update this path to point to your firebase.js f
 
-const SignUpModal = ({ isOpen, onRequestClose,onLoginClick }) => {
+const SignUpModal = ({ isOpen, onRequestClose, onLoginClick }) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+
 
   const onSubmit = async (event) => {
     event.preventDefault();
+  
+    // Check if passwords match
+    if (password !== confirmPassword) {
+      alert('Passwords do not match!');
+      return;
+    }
+  
     try {
       const user = await signUp(email, password, name);
-
+  
       // Check if signUp was successful
       if (user && user.uid) {
         console.log("Signup successful. User data:", user);
@@ -30,30 +39,29 @@ const SignUpModal = ({ isOpen, onRequestClose,onLoginClick }) => {
       console.error(error);
     }
   };
+  
 
   // ...
 
   return (
     <Modal
-  isOpen={isOpen}
-  onRequestClose={onRequestClose}
-  contentLabel="Sign Up Modal"
-  className="modal"
-  overlayClassName="overlay"
->
-
-  
-      <div className="flex flex-col items-center justify-center h-full px-8 bg-transparent  lg:mt-4 md:px-8 lg:px-12">
-        <div className="flex relative flex-col items-center w-full px-2 bg-white md:px-12 lg:px-14">
+      isOpen={isOpen}
+      onRequestClose={onRequestClose}
+      contentLabel="Sign Up Modal"
+      className="modal"
+      overlayClassName="overlay"
+    >
+      <div className="flex flex-col items-center justify-center h-full px-8 bg-transparent lg:mt-4 md:px-8 lg:px-12">
+        <div className="relative flex flex-col items-center w-full px-8 bg-white md:px-12 lg:px-14">
           <div
             className="absolute text-3xl text-black transition-transform transform cursor-pointer top-2 right-2 hover:scale-110"
             onClick={onRequestClose}
           >
             <FontAwesomeIcon icon={faTimes} />
           </div>
-          <div className="w-full text-center text-black   py-2 lg:pt-4 lg:text-5xl  lg:mt-0 mt-8 text-4xl font-bold font-['Poppins'] ">
+          <h1 className="w-full text-center text-black   py-2 lg:pt-4 lg:text-5xl  lg:mt-0 mt-8 text-4xl font-bold font-['Poppins'] ">
             Sign Up
-          </div>
+          </h1>
           <div className="w-full text-center text-black py-2  lg:text-lg font-normal font-['Poppins'] ">
             Sign up to get started!
           </div>
@@ -94,6 +102,18 @@ const SignUpModal = ({ isOpen, onRequestClose,onLoginClick }) => {
                 onChange={(event) => setPassword(event.target.value)}
               />
             </div>
+            <div className="flex flex-col items-start justify-start w-full lg:h-20 lg:gap-2">
+              <label className="w-full text-black text-base font-normal font-['Poppins'] leading-normal">
+                Confirm Password<span className="text-orange-600">*</span>
+              </label>
+              <input
+                className="w-full p-2 bg-white border border-black lg:p-3"
+                type="password"
+                value={confirmPassword}
+                onChange={(event) => setConfirmPassword(event.target.value)}
+              />
+            </div>
+
             <div className="flex flex-col items-center justify-center w-full gap-4 h-28">
               <button
                 type="submit"
@@ -114,8 +134,11 @@ const SignUpModal = ({ isOpen, onRequestClose,onLoginClick }) => {
               <div className="text-center text-black text-base whitespace-nowrap  lg:font-normal font-['Poppins'] lg:leading-normal">
                 Already have an account?
               </div>
-              <div className="group block relative">
-                <button onClick={onLoginClick} className="text-center text-black text-base lg:font-normal font-['Poppins'] leading-normal">
+              <div className="relative block group">
+                <button
+                  onClick={onLoginClick}
+                  className="text-center text-black text-base lg:font-normal font-['Poppins'] leading-normal"
+                >
                   login
                 </button>
                 <span className="h-[2px] bg-black absolute bottom-0 left-0 w-0 group-hover:w-full transition-all duration-300"></span>

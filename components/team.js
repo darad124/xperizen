@@ -11,12 +11,12 @@ const Team = () => {
   });
 
   return (
-    <div className="w-full px-4 py-28 flex-col justify-start items-start gap-20 inline-flex">
-      <div className=" flex-col justify-start items-start gap-4 flex">
+    <div className="inline-flex flex-col items-start justify-start w-full gap-20 px-4 py-28">
+      <div className="flex flex-col items-start justify-start gap-4 ">
         <div className="text-white text-base font-semibold font-['Poppins'] leading-normal">
           Our team
         </div>
-        <div className="self-stretch  flex-col justify-start items-center gap-6 flex">
+        <div className="flex flex-col items-center self-stretch justify-start gap-6">
           <div className="self-stretch text-orange-600 text-5xl font-bold font-['Poppins'] leading-[57.60px]">
             Meet the People who make things happen
           </div>
@@ -27,22 +27,22 @@ const Team = () => {
           </div>
         </div>
       </div>
-      <div className="  justify-start items-start gap-24 flex ">
-        <div className="self-stretch  flex w-full flex-wrap justify-start items-start ">
+      <div className="flex items-start justify-start gap-24 ">
+        <div className="flex flex-wrap items-start self-stretch justify-start w-full ">
           {teamMembers.map((member, index) => (
             <div
               key={index}
-              className="self-stretch justify-start items-start gap-12 flex-grow py-8"
+              className="items-start self-stretch justify-start flex-grow gap-12 py-8"
             >
-              <div className=" w-full shrink basis-0 flex-col justify-start items-start gap-6 inline-flex">
+              <div className="inline-flex flex-col items-start justify-start w-full gap-6 shrink basis-0">
                 <Image
                   src={member.image}
                   alt="Member Image"
                   width={395}
                   height={395}
                 />
-                <div className="self-stretch  flex-col justify-start items-center gap-4 flex">
-                  <div className="self-stretch  flex-col justify-start items-center flex">
+                <div className="flex flex-col items-center self-stretch justify-start gap-4">
+                  <div className="flex flex-col items-center self-stretch justify-start">
                     <div className="self-stretch text-white text-xl font-semibold font-['Poppins'] leading-[30px]">
                       {member.name}
                     </div>
@@ -86,9 +86,9 @@ const Team = () => {
           ))}
         </div>
       </div>
-      <div className="lg:w-[768px]  flex-col justify-start items-start gap-6 inline-flex">
-        <div className="h-[85px] flex-col justify-start items-center gap-4 flex">
-          <div className="self-stretch text-white text-[32px] font-bold font-['Poppins'] leading-[41.60px]">
+      <div className="inline-flex flex-col items-start justify-start gap-6 ">
+        <div className="flex flex-col items-center justify-start gap-4 ">
+          <div className="self-stretch text-white text-3xl font-bold font-['Poppins'] leading-[41.60px]">
             We’re hiring!
           </div>
           <div className="self-stretch text-white text-lg font-normal font-['Poppins'] leading-[27px]">
