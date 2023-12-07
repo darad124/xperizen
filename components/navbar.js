@@ -67,14 +67,14 @@ export default function Navbar() {
 
   return (
     <div
-      className={`top-0 flex flex-wrap w-full bg-black bg-opacity-75 z-10 sticky  md:flex-nowrap ${
+      className={`top-0 flex flex-wrap w-full bg-black bg-opacity-75 z-20 sticky  md:flex-nowrap ${
         modal ? "hidden" : ""
       }`}
     >
       <div className="relative inline-flex flex-col items-center justify-start w-full h-auto ">
-        <div className="inline-flex items-center self-stretch justify-between px-2 border-b md:px-16">
-          <div className="flex items-center justify-between gap-6">
-            <div className="flex-col justify-start items-center gap-2.5 inline-flex">
+        <div className="flex flex-row items-center justify-between w-full px-2 border-b md:flex-row md:self-stretch md:inline-flex md:px-16">
+          <div className="flex items-center justify-center order-2 md:gap-6 md:justify-between">
+            <div className="flex-col md:justify-start items-center gap-2.5 inline-flex">
               <Link href="/">
                 
                   <Image
@@ -87,6 +87,7 @@ export default function Navbar() {
               
               </Link>
             </div>
+            
             {/* Navigation links for desktop */}
             <div className="items-start justify-start hidden gap-8 md:flex">
               {navLinks.slice(0, 4).map((link, index) => (
@@ -100,7 +101,7 @@ export default function Navbar() {
             </div>
             {/* Buttons for desktop */}
           </div>
-          <div className="items-center justify-end hidden gap-4 md:flex">
+          <div className="items-center justify-end order-3 gap-4 md:flex">
             {user !== null ? (
               <div className="relative text-3xl text-orange-600">
                 <FontAwesomeIcon icon={faUser} onClick={toggleDropdown} />
@@ -136,8 +137,9 @@ export default function Navbar() {
                 )}
               </div>
             ) : (
-              <>
-                <Button color="white" onClick={handleLoginClick}>
+              
+              <div className="flex-row hidden gap-4 md:flex">
+                <Button color="white" onClick={handleLoginClick} >
                   Login
                 </Button>
                 <Button color="orange" onClick={handleSignUpClick}>
@@ -165,13 +167,13 @@ export default function Navbar() {
                     document.body.style.overflow = "hidden"; // Prevent background scrolling
                   }}
                 />
-              </>
+              </div>
             )}
           </div>
 
           {/* Hamburger menu icon for mobile (now on the right) */}
           <div
-            className="ml-auto cursor-pointer md:hidden"
+            className="order-1 cursor-pointer md:hidden"
             onClick={toggleMenu}
           >
             {menuOpen ? (

@@ -22,7 +22,13 @@ module.exports = {
           '0%': { 'width': '0%' },
           '100%': { 'width': '100%' }
         }
-      }
+      },
+      order: {
+        '1': '1',
+        '2': '2',
+        '3': '3',
+        // ... add as many as you need
+      },
     },
   },
   variants: {
