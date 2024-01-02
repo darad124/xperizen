@@ -22,7 +22,7 @@ const HomePage = () => {
     reference: new Date().getTime(),
     email: email,
     amount: 300000,
-    publicKey: "PAYSTACK_KEY",
+    publicKey: process.env.NEXT_PUBLIC_PAYSTACK_KEY,
   };
 
   const handleSuccess = (reference) => {
