@@ -14,10 +14,10 @@ import {
 } from "../src/firebase"; // Update this path to point to your firebase.js file
 
 const navLinks = [
-  { text: "About", link: "/about" },
-  { text: "Blog", link: "/blog" },
-  { text: "Events", link: "/events" },
-  { text: "Contact", link: "/contact" },
+  // { text: "About", link: "/about" },
+  // { text: "Blog", link: "/blog" },
+  // { text: "Events", link: "/events" },
+  // { text: "Contact", link: "/contact" },
   { text: "sign Up", modal: "signup" },
   { text: "login", modal: "login" },
 ];
@@ -89,7 +89,7 @@ export default function Navbar() {
             </div>
             
             {/* Navigation links for desktop */}
-            <div className="items-start justify-start hidden gap-8 md:flex">
+            {/* <div className="items-start justify-start hidden gap-8 md:flex">
               {navLinks.slice(0, 4).map((link, index) => (
                 <div
                   key={index}
@@ -98,7 +98,7 @@ export default function Navbar() {
                   <a href={link.link}>{link.text}</a>
                 </div>
               ))}
-            </div>
+            </div> */}
             {/* Buttons for desktop */}
           </div>
           <div className="items-center justify-end order-3 gap-4 md:flex">
@@ -170,8 +170,8 @@ export default function Navbar() {
               </div>
             )}
           </div>
-
-          {/* Hamburger menu icon for mobile (now on the right) */}
+          
+          {/* Hamburger menu icon for mobile (now on the left) */}
           <div
             className="order-1 cursor-pointer md:hidden"
             onClick={toggleMenu}

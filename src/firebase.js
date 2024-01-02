@@ -1,6 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getAuth, createUserWithEmailAndPassword, onAuthStateChanged, signOut, signInWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { getDatabase, ref, set, onValue } from "firebase/database";
+import { getFirestore, doc, setDoc } from "firebase/firestore";
 import { useState, useEffect } from 'react';
 
 // Your web app's Firebase configuration
@@ -18,6 +19,10 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getDatabase();
 const auth = getAuth(app);
+const firestore = getFirestore();
+
+// Create a document for the event
+
 
 export const signIn = async (email, password) => {
     try {

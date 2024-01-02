@@ -1,126 +1,187 @@
-import Image from "next/image";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
-import Discover from "@/components/discover";
+import { useState, useEffect } from "react";
 import ContactUs from "@/components/contact";
+import { PaystackButton } from "react-paystack";
+import { useAuthState } from "../src/firebase";
+import { ref, get } from 'firebase/database';
+import React, { useCallback } from 'react';
+import { db } from '../src/firebase';
+
+
+
+
+
 
 const HomePage = () => {
+  const user = useAuthState();
+  const [modal, setModal] = useState(null);
+  const [referenceId, setReferenceId] = useState(null); // State variable for storing the reference ID
+
+  const email = user?.email;
+
+  const config = {
+    reference: new Date().getTime(),
+    email: email,
+    amount: 300000,
+    publicKey: "pk_test_3079403538040524e8602da20f284acf4d9144f7",
+  };
+
+  const handleSuccess = (reference) => {
+    console.log('Reference:', reference);
+    console.log('payment has been made succesfully');
+    
+    
+    setReferenceId(reference); // Store the reference ID in state
+  };
+ 
+
+
+
+const sendEmail = useCallback(() => {
+  const userRef = ref(db, 'users/' + user.uid);
+  console.log('User reference:', userRef);
+
+  get(userRef)
+    .then((snapshot) => {
+      if (snapshot.exists()) {
+        console.log('Snapshot:', snapshot.val());
+        const username = snapshot.val().username;
+        console.log('Username:', username);
+
+        const emailData = {
+          sender: {
+            name: "Xperizen",
+            email: "xperizen@gmail.com"
+          },
+          to: [{
+            email: user.email,
+            name: username
+          }],
+          subject: "Your ticket for the meeting",
+          htmlContent: `
+  <div style="font-family: Arial, sans-serif; margin: 0 auto; max-width: 600px; padding: 20px; background-color: #000;">
+    <h1 style="color: #FFA500; text-align: center;">Your Ticket Confirmation for the Meating Event, ${username}!</h1>
+    <img src="https://drive.google.com/uc?export=download&id=1ODoTVAgaACtO2D2HzpfbkkWocTpWY2sx" alt="Meating Event banner" style="width:100%;height:auto;">
+    <div style="background-color: #333; padding: 20px; margin: 20px 0;">
+      <h2 style="color: #FFA500;">Event Details</h2>
+      <ul style="list-style-type: none; padding: 0; color: #fff;">
+        <li><strong>Date:</strong> Friday, Feb 2, 2024</li>
+        <li><strong>Time:</strong> 5pm</li>
+        <li><strong>About:</strong> Get ready for an evening of savoring different types of meat, accompanied by a live band. It's not just a meeting, it's a "meating"!</li>
+      </ul>
+    </div>
+    <p style="color: #fff;">This email confirms your ticket purchase for the event. Your reference ID is ${userRef.key}.</p>
+    <p style="color: #fff;">We're excited to have you join us! If you have any questions or need further information, please let us know.</p>
+    <p style="color: #fff;">Looking forward to seeing you there!</p>
+    <p style="color: #888;">Best,</p>
+    <p style="color: #888;">The Xperizen Team</p>
+    <p style="color: #888; text-align: center;"><img src="https://drive.google.com/uc?export=download&id=1rBCHNIdekXnV00MSQjiOD4VO-M6MVpRn" alt="Xperizen Logo" style="width:100px;height:auto;"></p>
+  </div>
+`
+
+        
+
+
+        };
+        console.log('Email data:', emailData);
+
+        return fetch('/api/send-email', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(emailData),
+        });
+      } else {
+        console.error('Snapshot does not exist');
+      }
+    })
+    .then((response) => {
+      console.log('Fetch response:', response);
+      return response.json();
+    })
+    .then((responseBody) => {
+      console.log('Response body:', responseBody);
+    })
+    .catch((error) => {
+      console.error('Error:', error);
+    });
+}, [user]); // include any dependencies of sendEmail here
+
+
+  
+  useEffect(() => {
+    if (referenceId) {
+      console.log('Reference ID:', referenceId);
+      sendEmail();
+    }
+  }, [referenceId, sendEmail]); // now sendEmail is a dependency
+  
+
+  const handleClose = () => {
+    console.log("closed");
+    // You can add more logic here when the payment is closed
+  };
+
+  const handleLoginClick = () => {
+    alert("Please sign in or sign up first");
+    
+  };
+  
+
+  const handleBuyTicketClick = () => {
+    if (!user) {
+      alert("Please sign in or sign up first");
+      // Optionally, you can open the login modal here
+      return;
+    }
+
+    const handler = window.PaystackPop.setup({
+      ...config,
+      callback: handleSuccess,
+      onClose: handleClose,
+    });
+    handler.openIframe();
+  };
+
   return (
-    <div >
-      <div
-        className="w-full bg-center max-w-full bg-cover h-[400px] md:h-[800px] bg-black bg-opacity-30"
-        style={{
-          backgroundImage: "url(./home1img.svg)",
-          filter: "blur(0.5px)",
-        }}
+    <div>
+  <div
+    className="hidden md:flex bg-no-repeat bg-cover md:bg-contain h-[1100px] bg-black bg-opacity-30"
+    style={{
+      backgroundImage: "url('/The meating final final.png')",
+    }}
+  ></div>
+  <div
+    className="h-[600px] md:hidden bg-cover bg-no-repeat bg-black bg-opacity-30"
+    style={{
+      backgroundImage: "url('/The meating final mobile.png')",
+    }}
+  ></div>
+
+  <div className="flex justify-center mt-10">
+    {user ? (
+      <PaystackButton
+        className="px-4 py-2 font-bold text-white bg-orange-600 rounded hover:bg-orange-700"
+        {...config}
+        onSuccess={handleSuccess}
+        onClose={handleClose}
+        text="Buy Ticket"
+        onClick={handleBuyTicketClick}
+      />
+    ) : (
+      <button
+        className="px-4 py-2 font-bold text-white bg-orange-600 rounded hover:bg-orange-700"
+        onClick={handleLoginClick}
       >
-        <div className="flex items-center justify-center pt-10 md:pt-[154px]">
-          <div className="w-1/2 md:w-[173.5px] lg:w-[347px]">
-            <Image
-              className="w-full h-auto "
-              src={"./logo.svg"}
-              alt="Logo"
-              layout="responsive"
-              width={347}
-              height={117}
-            />
-          </div>
-        </div>
-        <div className="flex items-center justify-center mt-10">
-        <div className="w-full md:w-[980px] text-center text-zinc-100 text-2xl md:text-5xl font-bold font-['Poppins'] lg:leading-[57.60px]">
-  {"Life is not a problem to be solved, but a reality to be experienced."} <br />- Soren Kierkegaard
-  <br />
+        Buy Ticket
+      </button>
+    )}
+  </div>
+
+  {/* Consider passing className as a prop to ContactUs component if needed */}
+  <ContactUs className="mt-8" />
 </div>
 
-        </div>
-      </div>
-      <div className="w-full h-auto lg:h-[302px] px-4 flex flex-col lg:flex-row items-center justify-center">
-        <div className="lg:w-[616px] lg:h-[134px] m-4 text-white text-[30px] lg:text-[56px] font-bold font-['Poppins'] lg:leading-[67.20px] text-center lg:text-left">
-          Step into the past with Experizen
-        </div>
-        <div className="lg:w-[616px] w-full  flex flex-col space-y-6">
-          <div className="w-full lg:w-[616px] text-white px-4 lg:px-0 text-lg font-normal font-['Poppins'] lg:leading-[27px] text-center lg:text-left">
-            Experience history like never before and immerse yourself in the
-            sights, sounds, and stories of century past.
-          </div>
-          <div className="relative inline-flex flex-col items-start justify-start w-full h-16 gap-1 pt-4 sm:gap-4">
-            <div className="absolute inline-flex items-start self-stretch justify-start h-auto gap-2 right-6 sm:gap-4 lg:left-0">
-              <button className="px-3 py-1.5 sm:px-6 sm:py-3 bg-orange-600 rounded-[6.5px] sm:rounded-[13px] justify-center items-center gap-1 sm:gap-2 flex ">
-                <div className="text-xs sm:text-base text-white font-normal font-['Poppins'] leading-normal">
-                  Explore
-                </div>
-              </button>
-              <button className="flex items-center justify-center gap-1 sm:gap-2 px-3 py-1.5 sm:px-6 sm:py-3 bg-black   hover:scale-105 transition-transform animate-pulse">
-                    <div className="text-white whitespace-nowrap text-xs sm:text-base font-normal font-['Poppins'] leading-normal">
-                      Book Now
-                    </div>
-                    <div className="relative w-6 h-6 transition-transform transform group-hover:translate-x-2">
-                      <FontAwesomeIcon
-                        icon={faChevronRight}
-                        className="text-2xl text-white"
-                      />
-                    </div>
-                  </button>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className="items-center justify-center w-full h-full ">
-        <div className="flex flex-col px-4 lg:px-16 lg:py-28 sm:py-12 lg:flex-row ">
-          <div className="flex  w-full h-full lg:h-[640px]">
-            <div className="justify-between w-full">
-              <div className="text-center lg:text-left text-white text-base font-semibold font-['Poppins'] leading-normal">
-                Uncover
-              </div>
-              <div className="w-full text-white lg:text-5xl text-center lg:text-left text-2xl font-bold font-['Poppins'] lg:leading-[57.60px]">
-                Step Back in Time and Experience History.
-              </div>
-              <div className="w-full text-white lg:text-lg font-normal font-['Poppins'] pt-[24px] leading-[27px] text-center lg:text-left">
-                At Experizen, we transport you back in time to experience life
-                as it was centuries ago.{" "}
-                <span className="hidden lg:inline">
-                  Immerse yourself in the sights, sounds and stories of the
-                  past, and gain a deeper understanding of our shared history.
-                  Our time travel experiences are meticulously crafted to
-                  provide an authentic and educational experience through time.
-                </span>
-              </div>
-
-              <div className="relative inline-flex flex-col items-start justify-start w-full h-16 gap-1 pt-4 sm:gap-4">
-                <div className="absolute inline-flex items-start self-stretch justify-start h-auto gap-2 right-6 sm:gap-4 lg:left-0">
-                  <button className="px-3 py-1.5 sm:px-6 sm:py-3 bg-orange-600   justify-center items-center gap-1 sm:gap-2 flex">
-                    <div className="text-white text-xs sm:text-base whitespace-nowrap lg:text-base font-normal font-['Poppins'] leading-normal">
-                      Learn More
-                    </div>
-                  </button>
-                  <button className="flex items-center justify-center gap-1 sm:gap-2 px-3 py-1.5   bg-black  hover:scale-105 transition-transform animate-pulse">
-                    <div className="text-white whitespace-nowrap text-xs sm:text-base font-normal font-['Poppins'] leading-normal">
-                      Book Now
-                    </div>
-                    <div className="relative w-6 h-6 transition-transform transform group-hover:translate-x-2">
-                      <FontAwesomeIcon
-                        icon={faChevronRight}
-                        className="text-2xl text-white"
-                      />
-                    </div>
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="w-full h-full lg:h-[640px] lg:pl-[80px] lg:pt-[0] pt-4 ">
-            <Image
-              src="https://via.placeholder.com/616x640" // replace with your image path
-              alt="Description of the image" // replace with your image description
-              width={500} // replace with your image width
-              height={300} // replace wit your image height
-            />
-          </div>
-        </div>
-      </div>
-      <Discover />
-      <ContactUs />
-    </div>
   );
 };
 

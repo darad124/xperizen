@@ -7,27 +7,30 @@ export default async function handler(req, res) {
     let transporter = nodemailer.createTransport({
       service: 'gmail',
       auth: {
-        user: process.env.EMAIL_USERNAME,
-        pass: process.env.EMAIL_PASSWORD,
-      },
+        user: process.env.EMAIL,
+        pass: process.env.PASSWORD
+      }
     });
 
     let mailOptions = {
-      from: process.env.EMAIL_USERNAME,
-      to: email,
-      subject: 'New query',
-      text: query,
+      from: process.env.EMAIL,
+      to: process.env.EMAIL,
+      subject: `New message from ${email}`,
+      text: query
     };
 
-    try {
-      await transporter.sendMail(mailOptions);
-      res.status(200).json({ success: true });
-    } catch (error) {
-      console.error(error);
-      res.status(500).json({ error: 'Error sending email' });
-    }
+    transporter.sendMail(mailOptions, (error, info) => {
+      if (error) {
+        console.log(error);
+        res.status(500).json({ message: 'Error sending email' });
+      } else {
+        console.log('Email sent: ' + info.response);
+        res.status(200).json({ message: 'Email sent successfully' });
+      }
+    });
   } else {
     // Handle any other HTTP method
-    res.status(200).json({ message: 'Email sent successfully' });
+    res.setHeader('Allow', ['POST']);
+    res.status(405).end(`Method ${req.method} Not Allowed`);
   }
 }

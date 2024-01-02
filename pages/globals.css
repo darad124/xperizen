@@ -50,3 +50,49 @@ body {
     
   }
 }
+
+@font-face {
+  font-family: 'HeadingNow-31Thin';
+  src: url('../public/fonts/HeadingNowTrial-31Thin.ttf') format('truetype');
+}
+
+/* ... repeat for each font ... */
+
+@font-face {
+  font-family: 'HeadingNow-38HeavyItalic';
+  src: url('../public/fonts/HeadingNowTrial-38HeavyItalic.ttf') format('truetype');
+}
+.font-heading {
+  font-family: 'HeadingNow-31Thin';
+}
+@font-face {
+  font-family: 'HeadingNow-38Heavy';
+  src: url('../public/fonts/HeadingNowTrial-38Heavy.ttf') format('truetype');
+}
+
+.font-heading-heavy {
+  font-family: 'HeadingNow-38Heavy';
+}
+
+@font-face {
+  font-family: 'HeadingNow-35Medium';
+  src: url('../public/fonts/HeadingNowTrial-35Medium.ttf') format('truetype');
+}
+
+.font-heading-medium {
+  font-family: 'HeadingNow-35Medium';
+  letter-spacing: 1px;
+  
+  line-height: 1;
+}
+
+.alert-green {
+  color: white; /* Text color */
+  background-color: limegreen; /* Background color */
+  border-radius: 5px; /* Rounded corners */
+  padding: 10px; /* Some padding */
+  position : fixed;
+  bottom : 10%;
+  border: 2px solid white; /* Border color */
+  
+}
