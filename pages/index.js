@@ -5,6 +5,7 @@ import { useAuthState } from "../src/firebase";
 import { ref, get } from 'firebase/database';
 import React, { useCallback } from 'react';
 import { db } from '../src/firebase';
+import { handlePaymentSuccess } from '../src/firebase';
 
 
 
@@ -36,77 +37,76 @@ const HomePage = () => {
 
 
 
-const sendEmail = useCallback(() => {
-  const userRef = ref(db, 'users/' + user.uid);
-  console.log('User reference:', userRef);
-
-  get(userRef)
-    .then((snapshot) => {
-      if (snapshot.exists()) {
-        console.log('Snapshot:', snapshot.val());
-        const username = snapshot.val().username;
-        console.log('Username:', username);
-
-        const emailData = {
-          sender: {
-            name: "Xperizen",
-            email: "xperizen@gmail.com"
-          },
-          to: [{
-            email: user.email,
-            name: username
-          }],
-          subject: "Your ticket for the meeting",
-          htmlContent: `
-  <div style="font-family: Arial, sans-serif; margin: 0 auto; max-width: 600px; padding: 20px; background-color: #000;">
-    <h1 style="color: #FFA500; text-align: center;">Your Ticket Confirmation for the Meating Event, ${username}!</h1>
-    <img src="https://drive.google.com/uc?export=download&id=1ODoTVAgaACtO2D2HzpfbkkWocTpWY2sx" alt="Meating Event banner" style="width:100%;height:auto;">
-    <div style="background-color: #333; padding: 20px; margin: 20px 0;">
-      <h2 style="color: #FFA500;">Event Details</h2>
-      <ul style="list-style-type: none; padding: 0; color: #fff;">
-        <li><strong>Date:</strong> Friday, Feb 2, 2024</li>
-        <li><strong>Time:</strong> 5pm</li>
-        <li><strong>About:</strong> Get ready for an evening of savoring different types of meat, accompanied by a live band. It's not just a meeting, it's a "meating"!</li>
-      </ul>
-    </div>
-    <p style="color: #fff;">This email confirms your ticket purchase for the event. Your reference ID is ${userRef.key}.</p>
-    <p style="color: #fff;">We're excited to have you join us! If you have any questions or need further information, please let us know.</p>
-    <p style="color: #fff;">Looking forward to seeing you there!</p>
-    <p style="color: #888;">Best,</p>
-    <p style="color: #888;">The Xperizen Team</p>
-    <p style="color: #888; text-align: center;"><img src="https://drive.google.com/uc?export=download&id=1rBCHNIdekXnV00MSQjiOD4VO-M6MVpRn" alt="Xperizen Logo" style="width:100px;height:auto;"></p>
-  </div>
-`
-
-        
-
-
-        };
-        console.log('Email data:', emailData);
-
-        return fetch('/api/send-email', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(emailData),
+  const sendEmail = useCallback(() => {
+    if (user) {
+      const userRef = ref(db, 'users/' + user.uid);
+      console.log('User reference:', userRef);
+  
+      get(userRef)
+        .then((snapshot) => {
+          if (snapshot.exists()) {
+            console.log('Snapshot:', snapshot.val());
+            const username = snapshot.val().username;
+            console.log('Username:', username);
+  
+            const emailData = {
+              sender: {
+                name: "Xperizen",
+                email: "xperizen@gmail.com"
+              },
+              to: [{
+                email: user.email,
+                name: username
+              }],
+              subject: "Your ticket for the meeting",
+              htmlContent: `
+      <div style="font-family: Arial, sans-serif; margin: 0 auto; max-width: 600px; padding: 20px; background-color: #000;">
+        <h1 style="color: #FFA500; text-align: center;">Your Ticket Confirmation for the Meating Event, ${username}!</h1>
+        <img src="https://drive.google.com/uc?export=download&id=1ODoTVAgaACtO2D2HzpfbkkWocTpWY2sx" alt="Meating Event banner" style="width:100%;height:auto;">
+        <div style="background-color: #333; padding: 20px; margin: 20px 0;">
+          <h2 style="color: #FFA500;">Event Details</h2>
+          <ul style="list-style-type: none; padding: 0; color: #fff;">
+            <li><strong>Date:</strong> Friday, Feb 2, 2024</li>
+            <li><strong>Time:</strong> 5pm</li>
+            <li><strong>About:</strong> Get ready for an evening of savoring different types of meat, accompanied by a live band. It's not just a meeting, it's a "meating"!</li>
+          </ul>
+        </div>
+        <p style="color: #fff;">This email confirms your ticket purchase for the event. Your reference ID is ${userRef.key}.</p>
+        <p style="color: #fff;">We're excited to have you join us! If you have any questions or need further information, please let us know.</p>
+        <p style="color: #fff;">Looking forward to seeing you there!</p>
+        <p style="color: #888;">Best,</p>
+        <p style="color: #888;">The Xperizen Team</p>
+        <p style="color: #888; text-align: center;"><img src="https://drive.google.com/uc?export=download&id=1rBCHNIdekXnV00MSQjiOD4VO-M6MVpRn" alt="Xperizen Logo" style="width:100px;height:auto;"></p>
+      </div>
+    `
+  
+            };
+            console.log('Email data:', emailData);
+  
+            return fetch('/api/send-email', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify(emailData),
+            });
+          } else {
+            console.error('Snapshot does not exist');
+          }
+        })
+        .then((response) => {
+          console.log('Fetch response:', response);
+          return response.json();
+        })
+        .then((responseBody) => {
+          console.log('Response body:', responseBody);
+        })
+        .catch((error) => {
+          console.error('Error:', error);
         });
-      } else {
-        console.error('Snapshot does not exist');
-      }
-    })
-    .then((response) => {
-      console.log('Fetch response:', response);
-      return response.json();
-    })
-    .then((responseBody) => {
-      console.log('Response body:', responseBody);
-    })
-    .catch((error) => {
-      console.error('Error:', error);
-    });
-}, [user]); // include any dependencies of sendEmail here
-
+    }
+  }, [user]); // include any dependencies of sendEmail here
+  
 
   
 useEffect(() => {

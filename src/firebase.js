@@ -36,6 +36,35 @@ export const signIn = async (email, password) => {
     }
   };
   
+  export const handlePaymentSuccess = async (user) => {
+    try {
+      // Log the user object before handling payment
+      console.log('User before handling payment:', user);
+  
+      // Check if user exists and has an email
+      if (user && user.email) {
+        // Create a reference to the 'paidUsers' node in the database
+        const paidUserRef = ref(db, 'paidUsers/' + user.uid);
+        
+        // Set the user's email and username at the created reference
+        await set(paidUserRef, { email: user.email, username: user.displayName });
+        
+        // Log the user object after handling payment
+        console.log('User after handling payment:', user);
+  
+        // Return a success message
+        return 'Payment handled successfully';
+      }
+    } catch (error) {
+      // Log any errors
+      console.error(error);
+      
+      // Return the error
+      return error;
+    }
+  };
+  
+  
 
 
   export const signUp = async (email, password, name) => {
