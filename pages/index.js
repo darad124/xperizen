@@ -109,12 +109,18 @@ const sendEmail = useCallback(() => {
 
 
   
-  useEffect(() => {
-    if (referenceId) {
-      console.log('Reference ID:', referenceId);
-      sendEmail();
-    }
-  }, [referenceId, sendEmail]); // now sendEmail is a dependency
+useEffect(() => {
+  if (referenceId) {
+    console.log('Reference ID:', referenceId);
+    
+    // Call the imported handlePaymentSuccess function
+    handlePaymentSuccess(user);
+
+    // Call sendEmail function
+    sendEmail();
+  }
+}, [referenceId, user, sendEmail]); // now user and sendEmail are dependencies
+
   
 
   const handleClose = () => {

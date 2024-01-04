@@ -6,10 +6,7 @@ import Head from 'next/head'; // <-- import this
 function MyApp({ Component, pageProps }) {
   return (
     <div className="min-h-screen bg-black bg-repeat bg-pattern bg-size">
-      <Head>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon x.png" />
-      </Head>
+    
       <Navbar  />
       <Component {...pageProps} />
       <Footer />
