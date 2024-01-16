@@ -6,8 +6,15 @@ import { ref, get } from 'firebase/database';
 import React, { useCallback } from 'react';
 import { db } from '../src/firebase';
 import { handlePaymentSuccess } from '../src/firebase';
+import SignUpModal from "@/components/signUpModal";
+import LoginModal from "@/components/loginModal";
 
 
+const navLinks = [
+ 
+  { text: "sign Up", modal: "signup" },
+  { text: "login", modal: "login" },
+];
 
 
 
@@ -15,6 +22,7 @@ import { handlePaymentSuccess } from '../src/firebase';
 const HomePage = () => {
   const user = useAuthState();
   const [modal, setModal] = useState(null);
+  
   const [referenceId, setReferenceId] = useState(null); // State variable for storing the reference ID
 
   const email = user?.email;
@@ -60,24 +68,7 @@ const HomePage = () => {
               }],
               subject: "Your ticket for the meeting",
               htmlContent: `
-      <div style="font-family: Arial, sans-serif; margin: 0 auto; max-width: 600px; padding: 20px; background-color: #000;">
-        <h1 style="color: #FFA500; text-align: center;">Your Ticket Confirmation for the Meating Event, ${username}!</h1>
-        <img src="https://drive.google.com/uc?export=download&id=1ODoTVAgaACtO2D2HzpfbkkWocTpWY2sx" alt="Meating Event banner" style="width:100%;height:auto;">
-        <div style="background-color: #333; padding: 20px; margin: 20px 0;">
-          <h2 style="color: #FFA500;">Event Details</h2>
-          <ul style="list-style-type: none; padding: 0; color: #fff;">
-            <li><strong>Date:</strong> Friday, Feb 2, 2024</li>
-            <li><strong>Time:</strong> 5pm</li>
-            <li><strong>About:</strong> Get ready for an evening of savoring different types of meat, accompanied by a live band. It's not just a meeting, it's a "meating"!</li>
-          </ul>
-        </div>
-        <p style="color: #fff;">This email confirms your ticket purchase for the event. Your reference ID is ${userRef.key}.</p>
-        <p style="color: #fff;">We're excited to have you join us! If you have any questions or need further information, please let us know.</p>
-        <p style="color: #fff;">Looking forward to seeing you there!</p>
-        <p style="color: #888;">Best,</p>
-        <p style="color: #888;">The Xperizen Team</p>
-        <p style="color: #888; text-align: center;"><img src="https://drive.google.com/uc?export=download&id=1rBCHNIdekXnV00MSQjiOD4VO-M6MVpRn" alt="Xperizen Logo" style="width:100px;height:auto;"></p>
-      </div>
+      
     `
   
             };
@@ -128,18 +119,17 @@ useEffect(() => {
     // You can add more logic here when the payment is closed
   };
 
-  const handleLoginClick = () => {
-    alert("Please sign in or sign up first");
+  const handleSignupClick = () => {
+    setModal("signup");
+
+    // Prevent background scrolling when modal is open
+    document.body.style.overflow = "hidden";
     
   };
   
 
   const handleBuyTicketClick = () => {
-    if (!user) {
-      alert("Please sign in or sign up first");
-      // Optionally, you can open the login modal here
-      return;
-    }
+   
 
     const handler = window.PaystackPop.setup({
       ...config,
@@ -175,12 +165,39 @@ useEffect(() => {
         onClick={handleBuyTicketClick}
       />
     ) : (
+      <div>
+         <SignUpModal
+                  isOpen={modal === "signup"}
+                  onRequestClose={() => {
+                    setModal("");
+                    document.body.style.overflow = "auto"; // Allow background scrolling
+                  }}
+                  onLoginClick={() => {
+                    setModal("login");
+                    document.body.style.overflow = "hidden"; // Prevent background scrolling
+                  }}
+                />
+
+              <LoginModal
+                  isOpen={modal === "login"}
+                  onRequestClose={() => {
+                    setModal("");
+                    document.body.style.overflow = "auto"; // Allow background scrolling
+                  }}
+                  onSignUpClick={() => {
+                    setModal("signup");
+                    document.body.style.overflow = "hidden"; // Prevent background scrolling
+                  }}
+                />
+
+                
       <button
         className="px-4 py-2 font-bold text-white bg-orange-600 rounded hover:bg-orange-700"
-        onClick={handleLoginClick}
+        onClick={handleSignupClick}
       >
         Buy Ticket
       </button>
+      </div>
     )}
   </div>
 
