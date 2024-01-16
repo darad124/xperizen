@@ -10,11 +10,7 @@ import SignUpModal from "@/components/signUpModal";
 import LoginModal from "@/components/loginModal";
 
 
-const navLinks = [
- 
-  { text: "sign Up", modal: "signup" },
-  { text: "login", modal: "login" },
-];
+
 
 
 
@@ -67,7 +63,24 @@ const HomePage = () => {
                 name: username
               }],
               subject: "Your ticket for the meeting",
-              htmlContent: `
+              htmlContent: ` <div style="font-family: Arial, sans-serif; margin: 0 auto; max-width: 600px; padding: 20px; background-color: #000;">
+              <h1 style="color: #FFA500; text-align: center;">Your Ticket Confirmation for the Meating Event, ${username}!</h1>
+              <img src="https://drive.google.com/uc?export=download&id=1ODoTVAgaACtO2D2HzpfbkkWocTpWY2sx" alt="Meating Event banner" style="width:100%;height:auto;">
+              <div style="background-color: #333; padding: 20px; margin: 20px 0;">
+                <h2 style="color: #FFA500;">Event Details</h2>
+                <ul style="list-style-type: none; padding: 0; color: #fff;">
+                  <li><strong>Date:</strong> Friday, Feb 2, 2024</li>
+                  <li><strong>Time:</strong> 5pm</li>
+                  <li><strong>About:</strong> Get ready for an evening of savoring different types of meat, accompanied by a live band. It's not just a meeting, it's a "meating"!</li>
+                </ul>
+              </div>
+              <p style="color: #fff;">This email confirms your ticket purchase for the event. Your reference ID is ${userRef.key}.</p>
+              <p style="color: #fff;">We're excited to have you join us! If you have any questions or need further information, please let us know.</p>
+              <p style="color: #fff;">Looking forward to seeing you there!</p>
+              <p style="color: #888;">Best,</p>
+              <p style="color: #888;">The Xperizen Team</p>
+              <p style="color: #888; text-align: center;"><img src="https://drive.google.com/uc?export=download&id=1rBCHNIdekXnV00MSQjiOD4VO-M6MVpRn" alt="Xperizen Logo" style="width:100px;height:auto;"></p>
+            </div>
       
     `
   
@@ -141,7 +154,7 @@ useEffect(() => {
 
   return (
     <div>
-  <div
+  {/* <div
     className="hidden md:flex bg-no-repeat bg-cover md:bg-contain h-[1100px] bg-black bg-opacity-30"
     style={{
       backgroundImage: "url('/The meating final final.png')",
@@ -152,7 +165,8 @@ useEffect(() => {
     style={{
       backgroundImage: "url('/The meating final mobile.png')",
     }}
-  ></div>
+  ></div> */}
+
 
   <div className="flex justify-center mt-10">
     {user ? (
