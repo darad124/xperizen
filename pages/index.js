@@ -8,6 +8,9 @@ import { db } from '../src/firebase';
 import { handlePaymentSuccess } from '../src/firebase';
 import SignUpModal from "@/components/signUpModal";
 import LoginModal from "@/components/loginModal";
+import Image from 'next/image';
+
+import { FaTicketAlt, FaMusic, FaClock, FaCalendarAlt } from "react-icons/fa";
 
 
 
@@ -166,18 +169,54 @@ useEffect(() => {
       backgroundImage: "url('/The meating final mobile.png')",
     }}
   ></div> */}
-
-
-  <div className="flex justify-center mt-10">
+   <div className=" min-h-screen">
+      <div className="container mx-auto px-4 py-8">
+        <div className="flex flex-col items-center justify-center">
+          <h1 className="text-6xl font-bold text-orange-600 text-center">The Meeting</h1>
+          
+          <div className="flex flex-wrap mt-8">
+            <div className="w-full md:w-1/2 lg:w-1/3 p-2">
+              <div className="bg-orange-100 rounded-lg p-4 shadow-lg">
+                <div className="flex items-center">
+                  <FaCalendarAlt className="text-orange-600 mr-2" />
+                  <p className="text-lg font-medium text-gray-700">
+                    Friday, Feb 2, 2024
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className="w-full md:w-1/2 lg:w-1/3 p-2">
+              <div className="bg-orange-100 rounded-lg p-4 shadow-lg">
+                <div className="flex items-center">
+                  <FaClock className="text-orange-600 mr-2" />
+                  <p className="text-lg font-medium text-gray-700">5pm</p>
+                </div>
+              </div>
+            </div>
+            <div className="w-full md:w-1/2 lg:w-1/3 p-2">
+              <div className="bg-orange-100 rounded-lg p-4 shadow-lg">
+                <div className="flex items-center">
+                  <FaMusic className="text-orange-600 mr-2" />
+                  <p className="text-lg font-medium text-gray-700">
+                    Live band performance
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className=" mt-10">
     {user ? (
       <PaystackButton
-        className="px-4 py-2 font-bold text-white bg-orange-600 rounded hover:bg-orange-700"
-        {...config}
-        onSuccess={handleSuccess}
-        onClose={handleClose}
-        text="Buy Ticket"
-        onClick={handleBuyTicketClick}
-      />
+      className=" font-bold text-white bg-orange-600 rounded hover:bg-orange-700  text-white px-8 py-4 rounded-lg shadow-lg hover:bg-orange-600 transition duration-300 ease-in-out"
+      {...config}
+      onSuccess={handleSuccess}
+      onClose={handleClose}
+      onClick={handleBuyTicketClick}
+    >
+      <FaTicketAlt className="inline-block mr-2" />
+      Buy Tickets
+    </PaystackButton>
+    
     ) : (
       <div>
          <SignUpModal
@@ -206,14 +245,40 @@ useEffect(() => {
 
                 
       <button
-        className="px-4 py-2 font-bold text-white bg-orange-600 rounded hover:bg-orange-700"
+        className=" font-bold text-white bg-orange-600 rounded hover:bg-orange-700  text-white px-8 py-4 rounded-lg shadow-lg hover:bg-orange-600 transition duration-300 ease-in-out"
         onClick={handleSignupClick}
       >
-        Buy Ticket
+         <FaTicketAlt className="inline-block mr-2" />
+        Buy Tickets
       </button>
       </div>
     )}
   </div>
+        </div>
+        <div class="bg-orange-100 mt-16 p-8 rounded-md">
+  <h1 class="md:text-6xl text-3xl text-bold font-mono text-gray-800">About the event</h1>
+  <h2 class="md:text-4xl text-2xl font-mono text-gray-800 mt-4 text-justify">
+    Get ready for an evening of savoring different types of meat,
+    accompanied by a live band. It’s not just a meeting, it’s a
+    <span class="text-red-600"> Meating</span>!
+  </h2>
+  <h3 class="md:text-3xl text-lg font-mono text-gray-800 mt-4 text-justify">
+    The event is organized by the Xperizen Team, a group of passionate
+    and creative professionals who love to create amazing experiences
+    for you.
+  </h3>
+</div>
+
+
+
+
+
+      </div>
+    </div>
+   
+
+
+  
 
   {/* Consider passing className as a prop to ContactUs component if needed */}
   <ContactUs className="mt-8" />

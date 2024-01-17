@@ -6,12 +6,14 @@ import Image from "next/image";
 import Link from 'next/link';
 import SignUpModal from "./signUpModal";
 import LoginModal from "./loginModal";
+
 import {
   auth,
   onAuthStateChanged,
   signOutUser,
   useAuthState,
 } from "../src/firebase"; // Update this path to point to your firebase.js file
+
 
 const navLinks = [
   // { text: "About", link: "/about" },
