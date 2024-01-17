@@ -2,26 +2,26 @@ import { useState, useEffect } from "react";
 import ContactUs from "@/components/contact";
 import { PaystackButton } from "react-paystack";
 import { useAuthState } from "../src/firebase";
-import { ref, get } from 'firebase/database';
-import React, { useCallback } from 'react';
-import { db } from '../src/firebase';
-import { handlePaymentSuccess } from '../src/firebase';
+import { ref, get } from "firebase/database";
+import React, { useCallback } from "react";
+import { db } from "../src/firebase";
+import { handlePaymentSuccess } from "../src/firebase";
 import SignUpModal from "@/components/signUpModal";
 import LoginModal from "@/components/loginModal";
-import Image from 'next/image';
+import Image from "next/image";
 
-import { FaTicketAlt, FaMusic, FaClock, FaCalendarAlt, FaMapMarker } from "react-icons/fa";
-
-
-
-
-
-
+import {
+  FaTicketAlt,
+  FaMusic,
+  FaClock,
+  FaCalendarAlt,
+  FaMapMarker,
+} from "react-icons/fa";
 
 const HomePage = () => {
   const user = useAuthState();
   const [modal, setModal] = useState(null);
-  
+
   const [referenceId, setReferenceId] = useState(null); // State variable for storing the reference ID
 
   const email = user?.email;
@@ -34,37 +34,35 @@ const HomePage = () => {
   };
 
   const handleSuccess = (reference) => {
-    console.log('Reference:', reference);
-    console.log('payment has been made succesfully');
-    
-    
+    console.log("Reference:", reference);
+    console.log("payment has been made succesfully");
+
     setReferenceId(reference); // Store the reference ID in state
   };
- 
-
-
 
   const sendEmail = useCallback(() => {
     if (user) {
-      const userRef = ref(db, 'users/' + user.uid);
-      console.log('User reference:', userRef);
-  
+      const userRef = ref(db, "users/" + user.uid);
+      console.log("User reference:", userRef);
+
       get(userRef)
         .then((snapshot) => {
           if (snapshot.exists()) {
-            console.log('Snapshot:', snapshot.val());
+            console.log("Snapshot:", snapshot.val());
             const username = snapshot.val().username;
-            console.log('Username:', username);
-  
+            console.log("Username:", username);
+
             const emailData = {
               sender: {
                 name: "Xperizen",
-                email: "xperizen@gmail.com"
+                email: "xperizen@gmail.com",
               },
-              to: [{
-                email: user.email,
-                name: username
-              }],
+              to: [
+                {
+                  email: user.email,
+                  name: username,
+                },
+              ],
               subject: "Your ticket for the meeting",
               htmlContent: ` <div style="font-family: Arial, sans-serif; margin: 0 auto; max-width: 600px; padding: 20px; background-color: #000;">
               <h1 style="color: #FFA500; text-align: center;">Your Ticket Confirmation for the Meating Event, ${username}!</h1>
@@ -85,50 +83,45 @@ const HomePage = () => {
               <p style="color: #888; text-align: center;"><img src="https://drive.google.com/uc?export=download&id=1rBCHNIdekXnV00MSQjiOD4VO-M6MVpRn" alt="Xperizen Logo" style="width:100px;height:auto;"></p>
             </div>
       
-    `
-  
+    `,
             };
-            console.log('Email data:', emailData);
-  
-            return fetch('/api/send-email', {
-              method: 'POST',
+            console.log("Email data:", emailData);
+
+            return fetch("/api/send-email", {
+              method: "POST",
               headers: {
-                'Content-Type': 'application/json',
+                "Content-Type": "application/json",
               },
               body: JSON.stringify(emailData),
             });
           } else {
-            console.error('Snapshot does not exist');
+            console.error("Snapshot does not exist");
           }
         })
         .then((response) => {
-          console.log('Fetch response:', response);
+          console.log("Fetch response:", response);
           return response.json();
         })
         .then((responseBody) => {
-          console.log('Response body:', responseBody);
+          console.log("Response body:", responseBody);
         })
         .catch((error) => {
-          console.error('Error:', error);
+          console.error("Error:", error);
         });
     }
   }, [user]); // include any dependencies of sendEmail here
-  
 
-  
-useEffect(() => {
-  if (referenceId) {
-    console.log('Reference ID:', referenceId);
-    
-    // Call the imported handlePaymentSuccess function
-    handlePaymentSuccess(user);
+  useEffect(() => {
+    if (referenceId) {
+      console.log("Reference ID:", referenceId);
 
-    // Call sendEmail function
-    sendEmail();
-  }
-}, [referenceId, user, sendEmail]); // now user and sendEmail are dependencies
+      // Call the imported handlePaymentSuccess function
+      handlePaymentSuccess(user);
 
-  
+      // Call sendEmail function
+      sendEmail();
+    }
+  }, [referenceId, user, sendEmail]); // now user and sendEmail are dependencies
 
   const handleClose = () => {
     console.log("closed");
@@ -140,13 +133,9 @@ useEffect(() => {
 
     // Prevent background scrolling when modal is open
     document.body.style.overflow = "hidden";
-    
   };
-  
 
   const handleBuyTicketClick = () => {
-   
-
     const handler = window.PaystackPop.setup({
       ...config,
       callback: handleSuccess,
@@ -157,7 +146,7 @@ useEffect(() => {
 
   return (
     <div>
-  {/* <div
+      {/* <div
     className="hidden md:flex bg-no-repeat bg-cover md:bg-contain h-[1100px] bg-black bg-opacity-30"
     style={{
       backgroundImage: "url('/The meating final final.png')",
@@ -169,124 +158,118 @@ useEffect(() => {
       backgroundImage: "url('/The meating final mobile.png')",
     }}
   ></div> */}
-   <div className=" min-h-screen">
-      <div className="container mx-auto px-4 py-8">
-        <div className="flex flex-col items-center justify-center">
-          <h1 className="text-6xl font-bold text-orange-600 text-center">The Meeting</h1>
-          
-          <div className="flex flex-wrap mt-8">
-            <div className="w-full md:w-1/2 lg:w-1/3 p-2">
-              <div className="bg-orange-100 rounded-lg p-4 shadow-lg">
-                <div className="flex items-center">
-                  <FaCalendarAlt className="text-orange-600 mr-2" />
-                  <p className="text-lg font-medium text-gray-700">
-                    Friday, Feb 2, 2024
-                  </p>
+      <div className=" min-h-screen">
+        <div className="container mx-auto px-4 py-8">
+          <div className="flex flex-col items-center justify-center">
+            <h1 className="text-6xl font-bold text-orange-600 text-center">
+              The Meeting
+            </h1>
+
+            <div className="flex flex-wrap mt-8">
+              <div className="w-full md:w-1/2 lg:w-1/3 p-2">
+                <div className="bg-orange-100 rounded-lg p-4 shadow-lg">
+                  <div className="flex items-center">
+                    <FaCalendarAlt className="text-orange-600 mr-2" />
+                    <p className="text-lg font-medium text-gray-700">
+                      Friday, Feb 2, 2024
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div className="w-full md:w-1/2 lg:w-1/3 p-2">
+                <div className="bg-orange-100 rounded-lg p-4 shadow-lg">
+                  <div className="flex items-center">
+                    <FaClock className="text-orange-600 mr-2" />
+                    <p className="text-lg font-medium text-gray-700">5pm</p>
+                  </div>
+                </div>
+              </div>
+              <div className="w-full md:w-1/2 lg:w-1/3 p-2">
+                <div className="bg-orange-100 rounded-lg p-4 shadow-lg hover:bg-orange-200 cursor-pointer">
+                  <div className="flex items-center">
+                    <FaMapMarker className="text-orange-600 animate-pulse mr-2" />
+                    <a
+                      href="https://www.google.com/maps/search/?api=1&query=Arnheim%20Art%20Gallery,%20Restaurant%20&%20Bar,%20Midget%20Golf,%20Suya%20Hut,%20Loging,%20Ibadan,%20Nigeria"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-lg font-medium text-gray-700"
+                    >
+                      Arnheim Art Gallery, Ibadan
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>
-            <div className="w-full md:w-1/2 lg:w-1/3 p-2">
-              <div className="bg-orange-100 rounded-lg p-4 shadow-lg">
-                <div className="flex items-center">
-                  <FaClock className="text-orange-600 mr-2" />
-                  <p className="text-lg font-medium text-gray-700">5pm</p>
+            <div className=" mt-10">
+              {user ? (
+                <PaystackButton
+                  className=" font-bold text-white bg-orange-600 rounded hover:bg-orange-700  text-white px-8 py-4 rounded-lg shadow-lg hover:bg-orange-600 transition duration-300 ease-in-out"
+                  {...config}
+                  onSuccess={handleSuccess}
+                  onClose={handleClose}
+                  onClick={handleBuyTicketClick}
+                >
+                  <FaTicketAlt className="inline-block mr-2" />
+                  Buy Tickets
+                </PaystackButton>
+              ) : (
+                <div>
+                  <SignUpModal
+                    isOpen={modal === "signup"}
+                    onRequestClose={() => {
+                      setModal("");
+                      document.body.style.overflow = "auto"; // Allow background scrolling
+                    }}
+                    onLoginClick={() => {
+                      setModal("login");
+                      document.body.style.overflow = "hidden"; // Prevent background scrolling
+                    }}
+                  />
+
+                  <LoginModal
+                    isOpen={modal === "login"}
+                    onRequestClose={() => {
+                      setModal("");
+                      document.body.style.overflow = "auto"; // Allow background scrolling
+                    }}
+                    onSignUpClick={() => {
+                      setModal("signup");
+                      document.body.style.overflow = "hidden"; // Prevent background scrolling
+                    }}
+                  />
+
+                  <button
+                    className=" font-bold text-white bg-orange-600 rounded hover:bg-orange-700  text-white px-8 py-4 rounded-lg shadow-lg hover:bg-orange-600 transition duration-300 ease-in-out"
+                    onClick={handleSignupClick}
+                  >
+                    <FaTicketAlt className="inline-block mr-2" />
+                    Buy Tickets
+                  </button>
                 </div>
-              </div>
+              )}
             </div>
-            <div className="w-full md:w-1/2 lg:w-1/3 p-2">
-  <div className="bg-orange-100 rounded-lg p-4 shadow-lg hover:bg-orange-200 cursor-pointer">
-    <div className="flex items-center">
-      <FaMapMarker className="text-orange-600 animate-pulse mr-2" />
-      <a href="https://www.google.com/maps/search/?api=1&query=Arnheim%20Art%20Gallery,%20Restaurant%20&%20Bar,%20Midget%20Golf,%20Suya%20Hut,%20Loging,%20Ibadan,%20Nigeria" target="_blank" rel="noopener noreferrer" className="text-lg font-medium text-gray-700">
-        Arnheim Art Gallery, Ibadan
-      </a>
-    </div>
-  </div>
-</div>
-
-
-
           </div>
-          <div className=" mt-10">
-    {user ? (
-      <PaystackButton
-      className=" font-bold text-white bg-orange-600 rounded hover:bg-orange-700  text-white px-8 py-4 rounded-lg shadow-lg hover:bg-orange-600 transition duration-300 ease-in-out"
-      {...config}
-      onSuccess={handleSuccess}
-      onClose={handleClose}
-      onClick={handleBuyTicketClick}
-    >
-      <FaTicketAlt className="inline-block mr-2" />
-      Buy Tickets
-    </PaystackButton>
-    
-    ) : (
-      <div>
-         <SignUpModal
-                  isOpen={modal === "signup"}
-                  onRequestClose={() => {
-                    setModal("");
-                    document.body.style.overflow = "auto"; // Allow background scrolling
-                  }}
-                  onLoginClick={() => {
-                    setModal("login");
-                    document.body.style.overflow = "hidden"; // Prevent background scrolling
-                  }}
-                />
-
-              <LoginModal
-                  isOpen={modal === "login"}
-                  onRequestClose={() => {
-                    setModal("");
-                    document.body.style.overflow = "auto"; // Allow background scrolling
-                  }}
-                  onSignUpClick={() => {
-                    setModal("signup");
-                    document.body.style.overflow = "hidden"; // Prevent background scrolling
-                  }}
-                />
-
-                
-      <button
-        className=" font-bold text-white bg-orange-600 rounded hover:bg-orange-700  text-white px-8 py-4 rounded-lg shadow-lg hover:bg-orange-600 transition duration-300 ease-in-out"
-        onClick={handleSignupClick}
-      >
-         <FaTicketAlt className="inline-block mr-2" />
-        Buy Tickets
-      </button>
-      </div>
-    )}
-  </div>
+          <div class="bg-orange-100 mt-16 p-8 rounded-md">
+            <h1 class="md:text-6xl text-3xl text-bold font-mono text-gray-800">
+              About the event
+            </h1>
+            <h2 class="md:text-4xl text-2xl font-mono text-gray-800 mt-4 text-justify">
+              Get ready for an evening of savoring different types of meat,
+              accompanied by a live band. It’s not just a meeting, it’s a
+              <span class="text-red-600"> Meating</span>!
+            </h2>
+            <h3 class="md:text-3xl text-lg font-mono text-gray-800 mt-4 text-justify">
+              The event is organized by the Xperizen Team, a group of passionate
+              and creative professionals who love to create amazing experiences
+              for you.
+            </h3>
+          </div>
         </div>
-        <div class="bg-orange-100 mt-16 p-8 rounded-md">
-  <h1 class="md:text-6xl text-3xl text-bold font-mono text-gray-800">About the event</h1>
-  <h2 class="md:text-4xl text-2xl font-mono text-gray-800 mt-4 text-justify">
-    Get ready for an evening of savoring different types of meat,
-    accompanied by a live band. It’s not just a meeting, it’s a
-    <span class="text-red-600"> Meating</span>!
-  </h2>
-  <h3 class="md:text-3xl text-lg font-mono text-gray-800 mt-4 text-justify">
-    The event is organized by the Xperizen Team, a group of passionate
-    and creative professionals who love to create amazing experiences
-    for you.
-  </h3>
-</div>
-
-
-
-
-
       </div>
+
+      {/* Consider passing className as a prop to ContactUs component if needed */}
+      <ContactUs className="mt-8" />
     </div>
-   
-
-
-  
-
-  {/* Consider passing className as a prop to ContactUs component if needed */}
-  <ContactUs className="mt-8" />
-</div>
-
   );
 };
 
