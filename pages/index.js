@@ -10,7 +10,7 @@ import SignUpModal from "@/components/signUpModal";
 import LoginModal from "@/components/loginModal";
 import Image from 'next/image';
 
-import { FaTicketAlt, FaMusic, FaClock, FaCalendarAlt } from "react-icons/fa";
+import { FaTicketAlt, FaMusic, FaClock, FaCalendarAlt, FaMapMarker } from "react-icons/fa";
 
 
 
@@ -194,15 +194,18 @@ useEffect(() => {
               </div>
             </div>
             <div className="w-full md:w-1/2 lg:w-1/3 p-2">
-              <div className="bg-orange-100 rounded-lg p-4 shadow-lg">
-                <div className="flex items-center">
-                  <FaMusic className="text-orange-600 mr-2" />
-                  <p className="text-lg font-medium text-gray-700">
-                    Live band performance
-                  </p>
-                </div>
-              </div>
-            </div>
+  <div className="bg-orange-100 rounded-lg p-4 shadow-lg hover:bg-orange-200 cursor-pointer">
+    <div className="flex items-center">
+      <FaMapMarker className="text-orange-600 animate-pulse mr-2" />
+      <a href="https://www.google.com/maps/search/?api=1&query=Arnheim%20Art%20Gallery,%20Restaurant%20&%20Bar,%20Midget%20Golf,%20Suya%20Hut,%20Loging,%20Ibadan,%20Nigeria" target="_blank" rel="noopener noreferrer" className="text-lg font-medium text-gray-700">
+        Arnheim Art Gallery, Ibadan
+      </a>
+    </div>
+  </div>
+</div>
+
+
+
           </div>
           <div className=" mt-10">
     {user ? (
